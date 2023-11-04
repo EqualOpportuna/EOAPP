@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,7 +43,7 @@
             android:layout_marginBottom="10dp"
             android:background="#FEFEFE"
             android:fontFamily="sans-serif-medium"
-            android:hint="your_name"
+            android:hint="Enter your name"
             android:inputType="textPersonName"
             android:padding="15dp"
             android:textSize="15sp" />
@@ -59,7 +57,7 @@
             android:layout_marginBottom="10dp"
             android:background="#FEFEFE"
             android:fontFamily="sans-serif-medium"
-            android:hint="e_mail"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="15dp"
             android:textSize="15sp" />
@@ -73,7 +71,7 @@
             android:layout_marginBottom="10dp"
             android:background="#FEFEFE"
             android:fontFamily="sans-serif-medium"
-            android:hint="password"
+            android:hint="Set a password"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="15sp" />
@@ -86,7 +84,7 @@
             android:layout_marginRight="20dp"
             android:background="#FEFEFE"
             android:fontFamily="sans-serif-medium"
-            android:hint="re_type_password"
+            android:hint="Confirm Password"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="15sp" />
@@ -106,18 +104,11 @@
                 android:layout_marginBottom="30dp"
                 android:background="#FB7F79"
                 android:fontFamily="sans-serif-medium"
-                android:text="register"
+                android:text="Register"
                 android:textColor="@color/black" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_above="@id/swipeLeft"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_arrow_left" />
-
             <TextView
-                android:id="@+id/swipeLeft"
+                android:id="@+id/or_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
