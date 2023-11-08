@@ -26,11 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 con = db.SQLConnection();
                 try {
                     if (con != null) {
+                        System.out.println("HI");
+                        System.out.println("first");
                         String Q = "Select * from users";
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(Q);
                         while (rs.next()) {
-                            String name = rs.getString("username");
+                            String name = rs.getString("full_name");
 
                             TextView textView = findViewById(R.id.textView);
                             textView.setText(name);
