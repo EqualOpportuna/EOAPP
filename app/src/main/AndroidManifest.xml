@@ -28,8 +28,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".login_page" />
         
+        <activity android:name=".login_page" />
+
         <activity android:name=".jobOpenings" />
     </application>
 
