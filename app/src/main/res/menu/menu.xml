@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_icon"
+        android:title="Home"
+        android:icon="@drawable/home_icon"/>
+
+    <item
+        android:id="@+id/jobs_icon"
+        android:title="Jobs"
+        android:icon="@drawable/jobs_icon" />
+
+    <item
+        android:id="@+id/courses_icon"
+        android:title="Courses"
+        android:icon="@drawable/courses_icon"/>
+
+    <item
+        android:id="@+id/stories_icon"
+        android:title="Courses"
+        android:icon="@drawable/stories_icon"/>
+</menu>
