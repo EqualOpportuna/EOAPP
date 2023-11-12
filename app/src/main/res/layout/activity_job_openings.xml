@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".jobOpenings">
+    android:orientation="vertical"
+    >
 
     <View
         android:id="@+id/header"
@@ -16,6 +17,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/footer"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".jobOpenings">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecycleJobPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:id="@+id/footer"
         android:layout_width="412dp"
@@ -23,52 +40,6 @@
         android:background="#F2E0DC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
+        android:layout_gravity="bottom"/>
 
-    <ScrollView
-        android:id="@+id/job_wall"
-        android:layout_width="409dp"
-        android:layout_height="618dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/post_job1"
-                android:layout_width="412dp"
-                android:layout_height="100dp"
-                android:background="#00FFFFFF"
-                android:textColor="#000000"
-                app:backgroundTint="#00FFFFFF" />
-
-            <ImageView
-                android:id="@+id/job1_logo"
-                android:layout_width="58dp"
-                android:layout_height="62dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="24dp"
-                app:srcCompat="@drawable/logo1" />
-
-            <TextView
-                android:id="@+id/job1_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="100dp"
-                android:text="Assistant clerk"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-        </RelativeLayout>
-
-
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
