@@ -1,98 +1,123 @@
 package com.example.equalopportuna;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class login_page extends AppCompatActivity {
-    Button loginButton;
-    EditText email,password;
+
+    private EditText etEmail, etPassword;
+    private Button loginButton;
+    private TextView registerTextView, forgotPasswordTextView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        loginButton = findViewById(R.id.btnLogin);
+        registerTextView = findViewById(R.id.tv_or_signup);
+        forgotPasswordTextView = findViewById(R.id.tv_forgot_password);
 
-        loginButton = findViewById(R.id.button2);
-        email = findViewById(R.id.editTextTextEmailAddress);
-        password = findViewById(R.id.editTextTextPassword);
-        loginButton.setOnClickListener(new View.OnClickListener(){
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_button(v);
+                // Handle the login logic here
+                if (validateInputs()) {
+                    // Inputs are valid, proceed with login
+                    login();
+                }
             }
         });
 
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToSignupActivity();
+            }
+        });
+
+        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("Forgot password clicked");
+            }
+        });
     }
 
-    public void login_button(View v) {
-        String emailText = email.getText().toString().trim();
-        String passwordText = password.getText().toString().trim();
+    private boolean validateInputs() {
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString();
 
-        // verification
-        if (emailText.isEmpty() || passwordText.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
-            return;
+        if (email.isEmpty() || password.isEmpty()) {
+            showToast("Please fill in all fields");
+            return false;
         }
-        if(service_login(emailText,passwordText)){
-            Toast.makeText(getApplicationContext(), "Login successfully!", Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Login Failed! Username or Password wrong", Toast.LENGTH_LONG).show();
 
-        }
+        return true;
     }
 
+    private void login() {
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString();
 
-    public boolean service_login(String email, String password){
+        Database database = new Database();
+        Connection connection = database.SQLConnection();
 
-        Database db = new Database();
-        Connection connection = db .SQLConnection();
-        if (connection != null){
+        if (connection != null) {
             try {
-                String query = "SELECT * FROM users WHERE email = ?";
+                String query = "SELECT id FROM users WHERE email = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, email);
+                preparedStatement.setString(2, password);
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 if (resultSet.next()) {
-                    String realpw = resultSet.getString("password");
-                    if (realpw == password){
-                        preparedStatement.close();
-                        connection.close();
-                        return true;
-                    }else{
-                        preparedStatement.close();
-                        connection.close();
-                        return false;
-                    }
-
-
-
-
+                    int userId = resultSet.getInt("id");
+                    showToast("Logged in successfully");
+                    navigateToMainPage(userId);
+                } else {
+                    showToast("Invalid email or password");
                 }
 
                 preparedStatement.close();
                 connection.close();
 
             } catch (SQLException e) {
-                return false;
+                showToast("Error checking login credentials: " + e.getMessage());
             }
+        } else {
+            showToast("Error connecting to the database");
         }
-        return false;
-
     }
 
+    private void navigateToMainPage(int userId) {
+        // Start the MainPageActivity and pass the user ID
+        Intent intent = new Intent(login_page.this, MainPageActivity.class);
+        intent.putExtra("USER_ID", userId);
+        startActivity(intent);
+    }
 
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
+    private void navigateToSignupActivity() {
+        // Start the SignupActivity
+        Intent intent = new Intent(login_page.this, sign_up.class);
+        startActivity(intent);
+    }
 }
