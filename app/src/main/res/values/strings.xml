@@ -40,4 +40,13 @@
         <item>demo_location10</item>
     </string-array>
 
+    <string name="string1">Welcome to EOApp!</string>
+    <string name="string2">Forgot your password or e-mail</string>
+    <string name="string3">change login method</string>
+    <string name="string4">e-mail</string>
+    <string name="string5">password</string>
+    <string name="string6">1.0.0</string>
+    <string name="string7">Login</string>
+    <string name="string8">Accounts</string>
+
 </resources>
