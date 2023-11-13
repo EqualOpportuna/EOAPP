@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +64,33 @@ public class MainPageActivity extends AppCompatActivity {
                 openImagePicker();
             }
         });
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
+
+                if (itemId == R.id.home_icon) {
+                    // Handle Home click
+                } else if (itemId == R.id.jobs_icon) {
+                    // Open jobOpenings activity and stay on Jobs in navigation
+                    Intent jobsIntent = new Intent(MainPageActivity.this, jobOpenings.class);
+                    jobsIntent.putExtra("USER_ID", userId); // Pass the user ID if needed
+                    startActivity(jobsIntent);
+                } else if (itemId == R.id.courses_icon) {
+                    // Handle Courses click
+                    // You can open the Courses activity or perform any other action
+                } else if (itemId == R.id.stories_icon) {
+                    // Handle Stories click
+                    // You can open the Stories activity or perform any other action
+                }
+
+                return true;
+            }
+        });
+
+
     }
 
     private void openImagePicker() {
