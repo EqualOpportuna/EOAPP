@@ -11,4 +11,5 @@ public class newJob_form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newjob_form);
     }
+
 }
