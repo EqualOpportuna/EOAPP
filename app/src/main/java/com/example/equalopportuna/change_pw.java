@@ -37,9 +37,7 @@ public class change_pw extends AppCompatActivity {
         btnproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateinputs()) {
-                    insertDatabase();
-                }
+
             }
         });
     }
