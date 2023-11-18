@@ -18,6 +18,8 @@ public class Database {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            
+
             con = DriverManager.getConnection(ConURL, "root", "um123456");
         } catch (ClassNotFoundException e) {
             Log.e("Error", "MySQL JDBC Driver not found: " + e.getMessage());
