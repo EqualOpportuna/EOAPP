@@ -5,21 +5,28 @@ import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Database {
     Connection con;
 
-    public Connection SQLConnection(){
+    public Connection SQLConnection() {
         StrictMode.ThreadPolicy tp = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(tp);
-        String ConURL = null;
-        try{
+        
+        String ConURL = "jdbc:mysql://114.132.171.90:3306/equalopportuna";
+
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            ConURL = "jdbc:mysql://sql12.freesqldatabase.com:3306/sql12657308";
-            con = DriverManager.getConnection(ConURL, "sql12657308", "sdm55pTuPS");
-        } catch (Exception e){
-            Log.e("Error", e.getMessage());
+            con = DriverManager.getConnection(ConURL, "root", "um123456");
+        } catch (ClassNotFoundException e) {
+            Log.e("Error", "MySQL JDBC Driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            Log.e("Error", "Error connecting to the database: " + e.getMessage());
         }
+
         return con;
     }
+
+
 }
