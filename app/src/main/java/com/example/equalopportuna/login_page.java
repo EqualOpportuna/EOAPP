@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ public class login_page extends AppCompatActivity {
     private Button loginButton;
     private TextView registerTextView, forgotPasswordTextView;
 
+    private UserManager userManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,10 @@ public class login_page extends AppCompatActivity {
         loginButton = findViewById(R.id.btnLogin);
         registerTextView = findViewById(R.id.tv_or_signup);
         forgotPasswordTextView = findViewById(R.id.tv_forgot_password);
+
+        // Use the singleton pattern to share the ViewModel
+        userManager = UserManager.getInstance(this);
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +85,7 @@ public class login_page extends AppCompatActivity {
 
         if (connection != null) {
             try {
-                String query = "SELECT id FROM users WHERE email = ? AND password = ?";
+                String query = "SELECT id, full_name, email, date_of_birth FROM users WHERE email = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, email);
                 preparedStatement.setString(2, password);
@@ -87,8 +94,16 @@ public class login_page extends AppCompatActivity {
 
                 if (resultSet.next()) {
                     int userId = resultSet.getInt("id");
+                    String fullName = resultSet.getString("full_name");
+                    String userEmail = resultSet.getString("email");
+                    String dateOfBirth = resultSet.getString("date_of_birth");
+
+                    // Set user information in UserViewModel
+                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth);
+                    System.out.println(userManager.getDateOfBirth());
+
                     showToast("Logged in successfully");
-                    navigateToMainPage(userId);
+                    navigateToMainPage();
                 } else {
                     showToast("Invalid email or password");
                 }
@@ -104,10 +119,9 @@ public class login_page extends AppCompatActivity {
         }
     }
 
-    private void navigateToMainPage(int userId) {
-        // Start the MainPageActivity and pass the user ID
-        Intent intent = new Intent(login_page.this, MainPageActivity.class);
-        intent.putExtra("USER_ID", userId);
+    private void navigateToMainPage() {
+        // Start the MainPageActivity
+        Intent intent = new Intent(login_page.this, MainActivity.class);
         startActivity(intent);
     }
 
