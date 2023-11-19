@@ -1,18 +1,10 @@
 package com.example.equalopportuna;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 public class jobOpenings extends AppCompatActivity {
 
     RecyclerView RecycleJobPosts;
@@ -32,7 +24,7 @@ public class jobOpenings extends AppCompatActivity {
         s2=getResources().getStringArray(R.array.company_name);
         s3=getResources().getStringArray(R.array.job_location);
 
-        adapter adp = new adapter(this, s1, s2, s3, images);
+        JobPost_adapter adp = new JobPost_adapter(this, s1, s2, s3, images);
         RecycleJobPosts.setAdapter(adp);
         RecycleJobPosts.setLayoutManager(new LinearLayoutManager(this));
 

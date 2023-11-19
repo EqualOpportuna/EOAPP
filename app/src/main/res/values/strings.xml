@@ -40,6 +40,32 @@
         <item>demo_location10</item>
     </string-array>
 
+    <string-array name="TVforumUsername">
+        <item>demo_job1</item>
+        <item>demo_job2</item>
+        <item>demo_job3</item>
+        <item>demo_job4</item>
+        <item>demo_job5</item>
+        <item>demo_job6</item>
+        <item>demo_job7</item>
+        <item>demo_job8</item>
+        <item>demo_job9</item>
+        <item>demo_job10</item>
+    </string-array>
+
+    <string-array name="TVforumPost">
+        <item>demo_company1</item>
+        <item>demo_company2</item>
+        <item>demo_company3</item>
+        <item>demo_company4</item>
+        <item>demo_company5</item>
+        <item>demo_company6</item>
+        <item>demo_company7</item>
+        <item>demo_company8</item>
+        <item>demo_company9</item>
+        <item>demo_company10</item>
+    </string-array>
+
     <string name="string1">Welcome to EOApp!</string>
     <string name="string2">Forgot your password or e-mail</string>
     <string name="string3">change login method</string>
@@ -48,5 +74,7 @@
     <string name="string6">1.0.0</string>
     <string name="string7">Login</string>
     <string name="string8">Accounts</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

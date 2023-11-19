@@ -10,13 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class adapter extends RecyclerView.Adapter<adapter.viewHolder>{
+public class JobPost_adapter extends RecyclerView.Adapter<JobPost_adapter.viewHolder>{
 
     String data1[], data2[], data3[];
     int images[];
     Context context;
 
-    adapter(Context ctx, String s1[], String s2[], String s3[], int img[]){
+    JobPost_adapter(Context ctx, String s1[], String s2[], String s3[], int img[]){
         context = ctx;
         data1 = s1;
         data2 = s2;
