@@ -1,5 +1,6 @@
 package com.example.equalopportuna;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,44 +10,50 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.viewHolder>{
+import java.util.List;
 
-    String username[], forumPost[];
-    Context context;
+public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.ForumPostViewHolder> {
 
-    ForumPostAdapter(Context ctx, String[] s1, String[] s2){
-        context = ctx;
-        username = s1;
-        forumPost = s2;
+    private final List<ForumPost> forumPosts;
+    private final LayoutInflater inflater;
 
+    public ForumPostAdapter(Context context, List<ForumPost> forumPosts) {
+        this.inflater = LayoutInflater.from(context);
+        this.forumPosts = forumPosts;
     }
 
     @NonNull
     @Override
-    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater  = LayoutInflater.from(context);
-        View ForumView = inflater.inflate(R.layout.activity_storiesforum_layout, parent, false);
-        return new viewHolder(ForumView);
+    public ForumPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.activity_storiesforum_layout, parent, false);
+        return new ForumPostViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.username.setText(username[position]);
-        holder.forumPost.setText(forumPost[position]);
+    public void onBindViewHolder(@NonNull ForumPostViewHolder holder, int position) {
+        ForumPost currentPost = forumPosts.get(position);
+        holder.bind(currentPost);
     }
 
     @Override
     public int getItemCount() {
-
-        return forumPost.length;
+        return forumPosts.size();
     }
 
-    class viewHolder extends RecyclerView.ViewHolder{
-        public TextView username, forumPost;
-        public viewHolder(@NonNull View itemView){
-            super (itemView);
-            username = itemView.findViewById(R.id.TVforumUsername);
-            forumPost = itemView.findViewById(R.id.TVforumPost);
+    static class ForumPostViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView usernameTextView;
+        private final TextView messageTextView;
+
+        public ForumPostViewHolder(@NonNull View itemView) {
+            super(itemView);
+            usernameTextView = itemView.findViewById(R.id.TVforumUsername);
+            messageTextView = itemView.findViewById(R.id.TVforumPost);
+        }
+
+        public void bind(ForumPost post) {
+            usernameTextView.setText(post.getUsername());
+            messageTextView.setText(post.getMessage());
         }
     }
 }
