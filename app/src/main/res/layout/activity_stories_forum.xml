@@ -8,34 +8,34 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ForumRecycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="584dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editTextMessage"
-        app:layout_constraintHeight_default="wrap"/>
-
-    <EditText
-        android:id="@+id/editTextMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Type your message..."
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
-        app:layout_constraintWidth_default="wrap"
-        android:inputType="textMultiLine"
-        android:layout_margin="8dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
         android:text="Submit"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintStart_toEndOf="@+id/editTextMessage"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="8dp"/>
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/editTextMessage"
+        app:layout_constraintTop_toBottomOf="@+id/ForumRecycler" />
+
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="56dp"
+        android:hint="Type your message..."
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ForumRecycler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
