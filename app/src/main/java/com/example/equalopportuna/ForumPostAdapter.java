@@ -14,10 +14,10 @@ import java.util.List;
 
 public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.ForumPostViewHolder> {
 
-    private final List<ForumPost> forumPosts;
+    private final List<ForumPostNew> forumPosts;
     private final LayoutInflater inflater;
 
-    public ForumPostAdapter(Context context, List<ForumPost> forumPosts) {
+    public ForumPostAdapter(Context context, List<ForumPostNew> forumPosts) {
         this.inflater = LayoutInflater.from(context);
         this.forumPosts = forumPosts;
     }
@@ -31,7 +31,7 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
 
     @Override
     public void onBindViewHolder(@NonNull ForumPostViewHolder holder, int position) {
-        ForumPost currentPost = forumPosts.get(position);
+        ForumPostNew currentPost = forumPosts.get(position);
         holder.bind(currentPost);
     }
 
@@ -51,7 +51,7 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             messageTextView = itemView.findViewById(R.id.TVforumPost);
         }
 
-        public void bind(ForumPost post) {
+        public void bind(ForumPostNew post) {
             usernameTextView.setText(post.getUsername());
             messageTextView.setText(post.getMessage());
         }
