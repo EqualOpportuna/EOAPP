@@ -40,7 +40,7 @@ public class JobOpeningsFragment extends Fragment {
                 R.drawable.logo1, R.drawable.logo2, R.drawable.logo3, R.drawable.logo4, R.drawable.um_logo};
 
         // Set up RecyclerView adapter
-        adapter adp = new adapter(requireContext(), jobTitles, companyNames, jobLocations, images);
+        JobPost_adapter adp = new JobPost_adapter(requireContext(), jobTitles, companyNames, jobLocations, images);
         recycleJobPosts.setAdapter(adp);
         recycleJobPosts.setLayoutManager(new LinearLayoutManager(requireContext()));
 
