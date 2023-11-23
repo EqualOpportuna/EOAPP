@@ -19,4 +19,8 @@
         android:name="com.example.equalopportuna.CreateJobFormFragment"
         android:label="fragment_create_job_form"
         tools:layout="@layout/fragment_create_job_form" />
+    <fragment
+        android:id="@+id/storiesForumFragment"
+        android:name="com.example.equalopportuna.StoriesForumFragment"
+        android:label="StoriesForumFragment" />
 </navigation>

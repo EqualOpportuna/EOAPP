@@ -1,31 +1,38 @@
 package com.example.equalopportuna;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoriesForum extends AppCompatActivity {
+public class StoriesForumFragment extends Fragment {
 
     private ForumPostAdapter adapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stories_forum);
+    public StoriesForumFragment() {
+        // Required empty public constructor
+    }
 
-        RecyclerView recyclerView = findViewById(R.id.ForumRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_stories_forum, container, false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.ForumRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Placeholder data from res/values/strings.xml
         List<ForumPostNew> forumPosts = createPlaceholderData();
 
-        adapter = new ForumPostAdapter(this, forumPosts);
+        adapter = new ForumPostAdapter(getActivity(), forumPosts);
         recyclerView.setAdapter(adapter);
+
+        return view;
     }
 
     private List<ForumPostNew> createPlaceholderData() {
@@ -41,5 +48,3 @@ public class StoriesForum extends AppCompatActivity {
         return placeholderData;
     }
 }
-
-

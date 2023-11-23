@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
                             .navigate(R.id.jobOpeningsFragment);
                     return true;
                 }
+                if (item.getItemId() == R.id.stories_icon) {
+                    // Navigate to AboutAppFragment using Navigation Component
+                    Navigation.findNavController(MainActivity.this, R.id.NHFMain)
+                            .navigate(R.id.storiesForumFragment);
+                    return true;
+                }
 
                 return false;
             }
