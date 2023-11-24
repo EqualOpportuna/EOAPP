@@ -49,5 +49,14 @@
     <string name="string7">Login</string>
     <string name="string8">Accounts</string>
     <string name="String9">Describe</string>
+    <string name="department">Department</string>
+    <string name="describe">Describe</string>
+    <string name="data_scientist">data scientist</string>
+    <string name="hintstyle">Hintstyle</string>
+    <string name="sales">Sales</string>
+    <string name="example1">example1</string>
+    <string name="software_developer">software developer</string>
+    <string name="department_selection">Department selection</string>
+    <string name="example2">example1</string>
 
 </resources>
