@@ -74,7 +74,16 @@
     <string name="string6">1.0.0</string>
     <string name="string7">Login</string>
     <string name="string8">Accounts</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="String9">Describe</string>
+    <string name="department">Department</string>
+    <string name="describe">Describe</string>
+    <string name="data_scientist">data scientist</string>
+    <string name="hintstyle">Hintstyle</string>
+    <string name="sales">Sales</string>
+    <string name="example1">example1</string>
+    <string name="software_developer">software developer</string>
+    <string name="department_selection">Department selection</string>
+    <string name="example2">example1</string>
+
 
 </resources>
