@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".jobOpenings">
+    tools:context=".JobOpeningsFragment">
 
     <View
         android:id="@+id/header"
         android:layout_width="412dp"
         android:layout_height="60dp"
-        android:background="#ECCDD0"
+
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -26,28 +28,16 @@
 
 
     <Button
-        android:id="@+id/new_btn"
+        android:id="@+id/btnCreateJob"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="36dp"
         android:foreground="@drawable/circle_btn"
         android:text="new"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ECCDD0"
-        app:itemIconTint="#92686C"
-        app:itemTextColor="#92686C"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

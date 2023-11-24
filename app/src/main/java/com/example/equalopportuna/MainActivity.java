@@ -1,47 +1,45 @@
 package com.example.equalopportuna;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    Connection con;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Database db = new Database();
-        Button btn = (Button)findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                con = db.SQLConnection();
-                try {
-                    if (con != null) {
-                        System.out.println("HI");
-                        System.out.println("first");
-                        String Q = "Select * from users";
-                        Statement st = con.createStatement();
-                        ResultSet rs = st.executeQuery(Q);
-                        while (rs.next()) {
-                            String name = rs.getString("full_name");
-
-                            TextView textView = findViewById(R.id.textView);
-                            textView.setText(name);
-
-                        }
-                    }
-                }catch (Exception e){
-                    Log.e("Error", e.getMessage());
+            public boolean onNavigationItemSelected(MenuItem item) {
+                if (item.getItemId() == R.id.home_icon) {
+                    // Navigate to AboutAppFragment using Navigation Component
+                    Navigation.findNavController(MainActivity.this, R.id.NHFMain)
+                            .navigate(R.id.mainPageFragment);
+                    return true;
                 }
+                if (item.getItemId() == R.id.jobs_icon) {
+                    // Navigate to AboutAppFragment using Navigation Component
+                    Navigation.findNavController(MainActivity.this, R.id.NHFMain)
+                            .navigate(R.id.jobOpeningsFragment);
+                    return true;
+                }
+                if (item.getItemId() == R.id.stories_icon) {
+                    // Navigate to AboutAppFragment using Navigation Component
+                    Navigation.findNavController(MainActivity.this, R.id.NHFMain)
+                            .navigate(R.id.storiesForumFragment);
+                    return true;
+                }
+
+                return false;
             }
         });
     }

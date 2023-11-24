@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainPageFragment">
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.example.equalopportuna.MainPageFragment"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" />
+    <fragment
+        android:id="@+id/jobOpeningsFragment"
+        android:name="com.example.equalopportuna.JobOpeningsFragment"
+        android:label="fragment_job_openings"
+        tools:layout="@layout/fragment_job_openings" />
+    <fragment
+        android:id="@+id/createJobFormFragment"
+        android:name="com.example.equalopportuna.CreateJobFormFragment"
+        android:label="fragment_create_job_form"
+        tools:layout="@layout/fragment_create_job_form" />
+    <fragment
+        android:id="@+id/storiesForumFragment"
+        android:name="com.example.equalopportuna.StoriesForumFragment"
+        android:label="StoriesForumFragment" />
+</navigation>
