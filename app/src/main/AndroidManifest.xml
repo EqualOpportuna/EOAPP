@@ -15,9 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EqualOpportuna"
         tools:targetApi="34">
-        <activity
-            android:name=".MainPageActivity"
-            android:exported="false" />
+
         <activity
             android:name=".sign_up"
             android:exported="true">
@@ -31,9 +29,7 @@
 
         <activity android:name=".login_page" />
 
-        <activity android:name=".jobOpenings" />
 
-        <activity android:name=".newJob_form" />
     </application>
 
 </manifest>
