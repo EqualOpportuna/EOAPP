@@ -1,6 +1,5 @@
 package com.example.equalopportuna;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class JobOpeningsFragment extends Fragment {
 
@@ -32,35 +33,32 @@ public class JobOpeningsFragment extends Fragment {
 
         recycleJobPosts = view.findViewById(R.id.RecycleJobPosts);
 
-        // Sample data
-        String[] jobTitles = getResources().getStringArray(R.array.job_titles);
-        String[] companyNames = getResources().getStringArray(R.array.company_name);
-        String[] jobLocations = getResources().getStringArray(R.array.job_location);
-        int[] images = {R.drawable.logo1, R.drawable.logo2, R.drawable.logo3, R.drawable.logo4, R.drawable.um_logo,
-                R.drawable.logo1, R.drawable.logo2, R.drawable.logo3, R.drawable.logo4, R.drawable.um_logo};
+        // Fetch job data from the database
+        List<Job> jobList = fetchJobData();
 
         // Set up RecyclerView adapter
-        JobPost_adapter adp = new JobPost_adapter(requireContext(), jobTitles, companyNames, jobLocations, images);
+        JobPost_adapter adp = new JobPost_adapter(requireContext(), jobList);
         recycleJobPosts.setAdapter(adp);
         recycleJobPosts.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-
-
         return view;
     }
+
+    private List<Job> fetchJobData() {
+        // Call a method in Database class to fetch job data
+        Database db = new Database();
+        return db.getJobData();
+    }
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Button btnCreatJob = view.findViewById(R.id.btnCreateJob);
         View.OnClickListener OCLCreatJob = new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.createJobFormFragment);
             }
         };
         btnCreatJob.setOnClickListener(OCLCreatJob);
-
-
     }
-
-
 }

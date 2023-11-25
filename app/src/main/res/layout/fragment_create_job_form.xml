@@ -111,16 +111,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_title" />
 
+    <Spinner
+        android:id="@+id/tierSpinner"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ET_location"/>
+
+    <!-- Modify the Button constraints to make space for the Spinner -->
     <Button
         android:id="@+id/jobPostBtn"
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="16dp"
         android:text="Draft Job Post!"
         android:backgroundTint="#92686C"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ET_location" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/tierSpinner"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
