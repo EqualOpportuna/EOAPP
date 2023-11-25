@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
                             .navigate(R.id.storiesForumFragment);
                     return true;
                 }
+                if (item.getItemId() == R.id.courses_icon) {
+                    // Navigate to AboutAppFragment using Navigation Component
+                    Navigation.findNavController(MainActivity.this, R.id.NHFMain)
+                            .navigate(R.id.CLFragment);
+                    return true;
+                }
 
                 return false;
             }
