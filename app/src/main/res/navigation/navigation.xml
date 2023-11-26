@@ -23,4 +23,8 @@
         android:id="@+id/storiesForumFragment"
         android:name="com.example.equalopportuna.StoriesForumFragment"
         android:label="StoriesForumFragment" />
+    <fragment
+        android:id="@+id/courselistingFragment"
+        android:name="com.example.equalopportuna.courselistingFragment"
+        android:label="courselistingFragment" />
 </navigation>
