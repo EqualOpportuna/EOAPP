@@ -6,25 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".StoriesForum">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ForumRecycler"
         android:layout_width="match_parent"
         android:layout_height="584dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <EditText
         android:id="@+id/ETMessage"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rectangle"
-        android:paddingLeft="20sp"
         android:hint="Write a post!"
         android:inputType="textMultiLine"
+        android:paddingLeft="20sp"
         app:layout_constraintBottom_toTopOf="@+id/ForumRecycler"
         app:layout_constraintEnd_toStartOf="@+id/BTNsend"
         app:layout_constraintStart_toStartOf="parent" />
@@ -33,7 +32,7 @@
         android:id="@+id/BTNsend"
         android:layout_width="68dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="#00FF0000"
         android:drawableLeft="@drawable/send_btn"
         android:scaleX="0.5"
@@ -41,20 +40,15 @@
         app:layout_constraintBottom_toTopOf="@+id/ForumRecycler"
         app:layout_constraintStart_toEndOf="@+id/ETMessage" />
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:background="#ECCDD0"
         app:itemIconTint="#92686C"
         app:itemTextColor="#92686C"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
