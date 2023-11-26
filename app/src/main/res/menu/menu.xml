@@ -20,4 +20,5 @@
         android:id="@+id/stories_icon"
         android:title="Stories"
         android:icon="@drawable/stories_icon"/>
+
 </menu>
