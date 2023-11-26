@@ -16,7 +16,9 @@ import androidx.navigation.Navigation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CreateJobFormFragment extends Fragment {
 
@@ -93,7 +95,7 @@ public class CreateJobFormFragment extends Fragment {
             try {
                 // Insert the job into the database with the selected tier
                 String query = "INSERT INTO jobs (jobTitle, companyName, jobLocation, tier) VALUES (?, ?, ?, ?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 preparedStatement.setString(1, jobTitle);
                 preparedStatement.setString(2, company);
                 preparedStatement.setString(3, location);
@@ -102,7 +104,34 @@ public class CreateJobFormFragment extends Fragment {
                 int rowsAffected = preparedStatement.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    Toast.makeText(requireContext(), "Job posted successfully", Toast.LENGTH_SHORT).show();
+                    // Successfully added to the database, now fetch the job ID
+                    ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                    int jobId = -1;
+                    if (generatedKeys.next()) {
+                        jobId = generatedKeys.getInt(1);
+                    }
+
+                    String fetchQuery = "SELECT * FROM jobs WHERE jobId = ?";
+                    PreparedStatement fetchStatement = connection.prepareStatement(fetchQuery);
+                    fetchStatement.setInt(1, jobId);
+                    ResultSet rs = fetchStatement.executeQuery();
+
+                    if (rs.next()) {
+                        int fetchedJobID = rs.getInt("jobId");
+                        String fetchedJobTitle = rs.getString("jobTitle");
+                        String fetchedCompanyName = rs.getString("companyName");
+                        String fetchedJobLocation = rs.getString("jobLocation");
+                        String fetchedTier = rs.getString("tier");
+
+                        Job newJob = new Job(fetchedJobID, fetchedJobTitle, fetchedCompanyName, fetchedJobLocation, fetchedTier);
+                        Job.getJobList().add(newJob);
+
+
+                        Toast.makeText(requireContext(), "Job posted successfully", Toast.LENGTH_SHORT).show();
+                    }
+
+                    generatedKeys.close();
+                    fetchStatement.close();
                 } else {
                     Toast.makeText(requireContext(), "Failed to post job", Toast.LENGTH_SHORT).show();
                 }
@@ -117,4 +146,5 @@ public class CreateJobFormFragment extends Fragment {
             Toast.makeText(requireContext(), "Error connecting to the database", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

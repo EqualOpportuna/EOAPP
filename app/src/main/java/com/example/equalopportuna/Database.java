@@ -32,37 +32,5 @@ public class Database {
         return con;
     }
 
-    public List<Job> getJobData() {
-        List<Job> jobList = new ArrayList<>();
-
-        // Use the existing connection or create a new one if needed
-        Connection connection = con != null ? con : SQLConnection();
-
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM jobs");
-
-            while (rs.next()) {
-                int jobID = rs.getInt("jobId");
-                String jobTitle = rs.getString("jobTitle");
-                String companyName = rs.getString("companyName");
-                String jobLocation = rs.getString("jobLocation");
-
-                String tier = rs.getString("tier");
-
-                Job job = new Job(jobID, jobTitle, companyName, jobLocation, tier);
-                jobList.add(job);
-            }
-
-            if (con == null) {
-                connection.close();
-            }
-
-        } catch (SQLException e) {
-            Log.e("Error", "Error fetching job data: " + e.getMessage());
-        }
-
-        return jobList;
-    }
 
 }

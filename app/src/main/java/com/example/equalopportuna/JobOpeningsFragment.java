@@ -1,3 +1,4 @@
+// JobOpeningsFragment.java
 package com.example.equalopportuna;
 
 import android.os.Bundle;
@@ -33,8 +34,8 @@ public class JobOpeningsFragment extends Fragment {
 
         recycleJobPosts = view.findViewById(R.id.RecycleJobPosts);
 
-        // Fetch job data from the database
-        List<Job> jobList = fetchJobData();
+        // Fetch job data from the static list
+        List<Job> jobList = Job.getJobList();
 
         // Set up RecyclerView adapter
         JobPost_adapter adp = new JobPost_adapter(requireContext(), jobList);
@@ -42,12 +43,6 @@ public class JobOpeningsFragment extends Fragment {
         recycleJobPosts.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         return view;
-    }
-
-    private List<Job> fetchJobData() {
-        // Call a method in Database class to fetch job data
-        Database db = new Database();
-        return db.getJobData();
     }
 
     @Override

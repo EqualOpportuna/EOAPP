@@ -1,3 +1,4 @@
+// login_page.java
 package com.example.equalopportuna;
 
 import android.content.Intent;
@@ -9,12 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class login_page extends AppCompatActivity {
 
@@ -23,6 +24,9 @@ public class login_page extends AppCompatActivity {
     private TextView registerTextView, forgotPasswordTextView;
 
     private UserManager userManager;
+
+    private Job jobs;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +38,8 @@ public class login_page extends AppCompatActivity {
         registerTextView = findViewById(R.id.tv_or_signup);
         forgotPasswordTextView = findViewById(R.id.tv_forgot_password);
 
-        // Use the singleton pattern to share the ViewModel
+        // Use the singleton pattern to share the UserManager
         userManager = UserManager.getInstance(this);
-
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +103,7 @@ public class login_page extends AppCompatActivity {
 
                     // Set user information in UserViewModel
                     userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth);
-                    System.out.println(userManager.getDateOfBirth());
-
+                    jobs.fetchAndStoreJobData(connection);
                     showToast("Logged in successfully");
                     navigateToMainPage();
                 } else {
