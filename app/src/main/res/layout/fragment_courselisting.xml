@@ -5,42 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2E0DC">
-    <!-- activity_main.xml -->
+
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/search_view"
         android:hint="@string/search_here"
-
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"/>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/imageView"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:layout_toEndOf="@id/imageView"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="courseName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/feedback"
+            android:layout_toEndOf="@id/imageView"
+            android:layout_below="@id/name"
+            android:textColor="@color/black"
+            android:text="good"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="10dp"
+            android:background="#F2E0DC"/>
+
+
+    </RelativeLayout>/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/searchView"
-        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_begin="64dp"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- RecyclerView for the list -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recycleView"
         android:layout_width="0dp"
-        android:layout_height="665dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="40dp"
+    android:layout_height="wrap_content">
+    
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageView"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:layout_toEndOf="@id/imageView"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="courseName"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedback"
+        android:layout_toEndOf="@id/imageView"
+        android:layout_below="@id/name"
+        android:textColor="@color/black"
+        android:text="good"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="10dp"
+        android:background="#F2E0DC"/>
+
+
+</RelativeLayout>
