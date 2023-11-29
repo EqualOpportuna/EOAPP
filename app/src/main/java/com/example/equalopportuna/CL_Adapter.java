@@ -22,7 +22,7 @@ public class CL_Adapter extends RecyclerView.Adapter<CL_icon_view> {
     @NonNull
     @Override
     public CL_icon_view onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CL_icon_view(LayoutInflater.from(context).inflate(R.layout.cl_icon_view,parent,false));
+        return new CL_icon_view(LayoutInflater.from(context).inflate(R.layout.item_cl_icon,parent,false));
     }
 
     @Override

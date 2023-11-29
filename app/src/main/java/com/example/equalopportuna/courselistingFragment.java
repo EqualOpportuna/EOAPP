@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class courselistingFragment extends Fragment {
@@ -41,6 +43,14 @@ public class courselistingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RecyclerView recyclerView = getView().findViewById(R.id.recycleView);
+        List<itemCourseLisiting> items = new ArrayList<itemCourseLisiting>();
+        items.add(new itemCourseLisiting("Hunter's Guide",R.drawable.apex,"grate"));
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new CL_Adapter(getApplicationContext()));
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
