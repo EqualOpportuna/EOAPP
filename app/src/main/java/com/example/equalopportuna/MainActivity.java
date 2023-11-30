@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId() == R.id.community){
+                if(item.getItemId() == R.id.Community){
                     Navigation.findNavController(MainActivity.this, R.id.NHFMain)
                             .navigate(R.id.fragment_community);
                     return true;

@@ -7,8 +7,8 @@
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
-    <item android:id="@+id/community"
-        android:title="Peers"
+    <item android:id="@+id/Community"
+        android:title="Community"
         app:showAsAction="collapseActionView|ifRoom"
         android:icon="@drawable/ic_community" />
 

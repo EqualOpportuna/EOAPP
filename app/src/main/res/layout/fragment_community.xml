@@ -1,22 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/csLayout"
+    android:id="@+id/fragment_community"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Community">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_community"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="false"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/navigation"
-        tools:layout="@layout/fragment_users"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tabGravity="fill"
+        app:tabMode="fixed"/>
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <FrameLayout
+            android:id="@+id/fragment_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Label for Users Fragment -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Users Fragment Label"
+                android:textSize="18sp"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_friends"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Label for Friends Fragment -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friends Fragment Label"
+                android:textSize="18sp"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Label for Chat Fragment -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat Fragment Label"
+                android:textSize="18sp"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+    </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>
