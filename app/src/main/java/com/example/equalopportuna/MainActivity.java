@@ -2,19 +2,27 @@ package com.example.equalopportuna;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
 
@@ -42,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.courses_icon) {
                     // Navigate to AboutAppFragment using Navigation Component
                     Navigation.findNavController(MainActivity.this, R.id.NHFMain)
-                            .navigate(R.id.courselistingFragment);
+                            .navigate(R.id.recycleView);
                     return true;
                 }
 
