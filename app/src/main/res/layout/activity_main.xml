@@ -15,33 +15,30 @@
         android:orientation="vertical"
         android:background="#ECCDD0">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="#ECCDD0"
+            android:elevation="4dp"
+            android:paddingLeft="20sp"
+            app:itemIconTint="#92686C"
+            app:menu="@menu/search_menu">
 
-            <EditText
-                android:id="@+id/ETsearch"
-                android:layout_width="280sp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rectangle"
-                android:backgroundTint="#F2E0DC"
-                android:hint="Search..."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingLeft="20sp"
-                android:textColorHint="#92686C " />
-            <Button
-                android:id="@+id/BTNcommunity"
-                android:layout_width="60dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="38sp"
-                android:foregroundTint="#92686C"
-                android:foreground="@drawable/ic_community"
-                android:background="@drawable/ic_community"/>
-        </LinearLayout>
+        <EditText
+            android:id="@+id/ETsearch"
+            android:layout_width="280sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            android:backgroundTint="#F2E0DC"
+            android:hint="Search..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="20sp"
+            android:textColorHint="#92686C " />
+
+    </androidx.appcompat.widget.Toolbar>
 
 
         <androidx.fragment.app.FragmentContainerView
