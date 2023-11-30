@@ -44,13 +44,7 @@ public class courselistingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RecyclerView recyclerView = getView().findViewById(R.id.recycleView);
-        List<itemCourseLisiting> items = new ArrayList<itemCourseLisiting>();
-        items.add(new itemCourseLisiting("Hunter's Guide",R.drawable.apex,"grate"));
 
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CL_Adapter());
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
