@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="15dp">
 
             <EditText
                 android:id="@+id/ETsearch"
@@ -37,7 +37,8 @@
                 android:id="@+id/BTNcommunity"
                 android:layout_width="60dp"
                 android:layout_height="35dp"
-                android:layout_marginLeft="45sp"
+                android:layout_marginLeft="38sp"
+                android:foregroundTint="#92686C"
                 android:foreground="@drawable/ic_community"
                 android:background="@drawable/ic_community"/>
         </LinearLayout>
