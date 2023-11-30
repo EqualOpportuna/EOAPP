@@ -1,6 +1,7 @@
 package com.example.equalopportuna;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,42 +22,51 @@ import java.util.List;
 public class courselistingFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private AA_recyclerViewAdapter adapter;
 
-    private String mParam1;
-    private String mParam2;
+
+
 
     public courselistingFragment() {
         // Required empty public constructor
     }
 
 
-    public static courselistingFragment newInstance(String param1, String param2) {
-        courselistingFragment fragment = new courselistingFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_courselisting, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_courselisting, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.CourseRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // Placeholder data from res/values/strings.xml
+        List<Model> ModelIs = createPlaceholderCourse();
+
+        adapter = new AA_recyclerViewAdapter(getActivity(), ModelIs);
+        recyclerView.setAdapter(adapter);
+
+
+        return view;
     }
-}
+
+    private List<Model> createPlaceholderCourse() {
+        List<Model> placeHolderCourse = new ArrayList<>();
+        String[] courseName = getResources().getStringArray(R.array.TVcourseName);
+        String[] courseDate = getResources().getStringArray(R.array.TVcourseDate);
+        String[] courseFeedback = getResources().getStringArray(R.array.TVcourseFeedback);
+
+        for (int i = 0; i < courseName.length &&
+                i < courseDate.length &&
+                i < courseFeedback.length; i++) {
+            Model course = new Model(courseName[i], courseDate[i], courseFeedback[i]);
+            placeHolderCourse.add(course);
+        }
+
+        return placeHolderCourse;
+
+
+    }}
