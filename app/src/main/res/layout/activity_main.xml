@@ -12,7 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#ECCDD0">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,20 +25,20 @@
             app:itemIconTint="#92686C"
             app:menu="@menu/search_menu">
 
-            <EditText
-                android:id="@+id/ETsearch"
-                android:layout_width="280sp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rectangle"
-                android:backgroundTint="#F2E0DC"
-                android:hint="Search..."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingLeft="20sp"
-                android:textColorHint="#92686C " />
+        <EditText
+            android:id="@+id/ETsearch"
+            android:layout_width="280sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle"
+            android:backgroundTint="#F2E0DC"
+            android:hint="Search..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="20sp"
+            android:textColorHint="#92686C " />
 
-        </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
         <androidx.fragment.app.FragmentContainerView

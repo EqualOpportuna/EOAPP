@@ -27,4 +27,30 @@
         android:id="@+id/recycleView"
         android:name="com.example.equalopportuna.courselistingFragment"
         android:label="courselistingFragment" />
+    <fragment
+        android:id="@+id/Users"
+        android:name="com.example.equalopportuna.Users"
+        android:label="Users"/>
+    <fragment
+        android:id="@+id/Friends"
+        android:name="com.example.equalopportuna.Friends"
+        android:label="Friends"/>
+    <fragment
+        android:id="@+id/Chats"
+        android:name="com.example.equalopportuna.chat"
+        android:label="Users"/>
+    <fragment
+        android:id="@+id/fragment_community"
+        android:name="com.example.equalopportuna.Community"
+        android:label="Community">
+        <action
+            android:id="@+id/action_Community_user"
+            app:destination="@id/Users" />
+        <action
+            android:id="@+id/action_Community_friends"
+            app:destination="@id/Friends" />
+        <action
+            android:id="@+id/action_Community_chat"
+            app:destination="@id/Chats" />
+    </fragment>
 </navigation>
