@@ -21,7 +21,7 @@ class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter
         this.ModelIs = ModelIS;
     }
 
-    public AA_recyclerViewAdapter(courseCardView context, List<Model> course) {
+    public AA_recyclerViewAdapter(crouseCardView context, List<Model> course) {
     }
 
     @NonNull

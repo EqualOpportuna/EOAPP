@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class courseCardView extends AppCompatActivity {
+public class crouseCardView extends AppCompatActivity {
     private AA_recyclerViewAdapter adapter;
 
     @Override
