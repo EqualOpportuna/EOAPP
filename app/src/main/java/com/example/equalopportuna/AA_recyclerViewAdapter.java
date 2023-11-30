@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter.MyViewHolder> {
@@ -22,7 +21,7 @@ class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter
         this.ModelIs = ModelIS;
     }
 
-    public AA_recyclerViewAdapter(crouseCardView context, List<Model> course) {
+    public AA_recyclerViewAdapter(courseCardView context, List<Model> course) {
     }
 
     @NonNull
@@ -56,9 +55,9 @@ class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView4);
-            tvName = itemView.findViewById(R.id.textView8);
-            tvDate = itemView.findViewById(R.id.textView6);
-            tvFeedback = itemView.findViewById(R.id.textView9);
+            tvName = itemView.findViewById(R.id.TVcourseName);
+            tvDate = itemView.findViewById(R.id.TVcourseDate);
+            tvFeedback = itemView.findViewById(R.id.TVcourseFeedback);
         }
     }
 

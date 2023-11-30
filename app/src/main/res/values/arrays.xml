@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="TVcourseName">Name of course</string-array>
-    <string-array name="TVcourseDate">Date of course</string-array>
-    <string-array name="TVcourseFeedback">Feedback of course</string-array>
-</resources>
