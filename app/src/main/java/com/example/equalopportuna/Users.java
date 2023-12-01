@@ -1,50 +1,36 @@
 package com.example.equalopportuna;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import java.util.List;public class Users extends Fragment {
-    RecyclerView RecyclerUser;
+public class Users {
+    private String username;
+    private String careerDescription;
+    private String imageUrl;
 
-    public Users() {
-        // Required empty public constructor
+    public Users(String username, String careerDescription, String imageUrl) {
+        this.username = username;
+        this.careerDescription = careerDescription;
+        this.imageUrl = imageUrl;
     }
 
-    public static Users newInstance() {
-        return new Users();
+    public String getUsername() {
+        return username;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);}
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_users, container, false);
-        View view = inflater.inflate(R.layout.fragment_users, container, false);
-
-        RecyclerUser = view.findViewById(R.id.RecyclerUser);
-
-        // Fetch job data from the static list
-        List<Job> jobList = Job.getJobList();
-
-        // Set up RecyclerView adapter
-        JobPost_adapter adp = new JobPost_adapter(requireContext(), jobList);
-        RecyclerUser.setAdapter(adp);
-        RecyclerUser.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-        return view;
+    public String getCareerDescription() {
+        return careerDescription;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public static List<Users> getUserList() {
+        List<Users> userList = new ArrayList<>();
+
+        return userList;
+    }
+    Users user1 = new Users("JohnDoe", "Software Engineer", "https://www.gstatic.com/android/keyboard/emojikitchen/20221101/u1f98a/u1f98a_u1f920.png?fbx");
+    Users user2 = new Users("AliceSmith", "Graphic Designer", "https://www.gstatic.com/android/keyboard/emojikitchen/20201001/u1f60e/u1f60e_u1f435.png?fbx");
+
 }

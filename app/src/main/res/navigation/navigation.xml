@@ -29,7 +29,7 @@
         android:label="courselistingFragment" />
     <fragment
         android:id="@+id/Users"
-        android:name="com.example.equalopportuna.Users"
+        android:name="com.example.equalopportuna.UsersFragment"
         android:label="Users"/>
     <fragment
         android:id="@+id/Friends"
