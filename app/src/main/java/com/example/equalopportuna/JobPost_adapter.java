@@ -1,6 +1,7 @@
 package com.example.equalopportuna;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,52 +11,77 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class JobPost_adapter extends RecyclerView.Adapter<JobPost_adapter.viewHolder>{
+import com.bumptech.glide.Glide;
 
-    String data1[], data2[], data3[];
-    int images[];
+import java.util.List;
+
+public class JobPost_adapter extends RecyclerView.Adapter<JobPost_adapter.viewHolder> {
+
+    List<Job> jobList;
     Context context;
 
-    JobPost_adapter(Context ctx, String s1[], String s2[], String s3[], int img[]){
+    JobPost_adapter(Context ctx, List<Job> jobs) {
         context = ctx;
-        data1 = s1;
-        data2 = s2;
-        data3 = s3;
-        images = img;
-
+        jobList = jobs;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater  = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.jobpost_layout, parent, false);
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.title.setText(data1[position]);
-        holder.companyName.setText(data2[position]);
-        holder.location.setText(data3[position]);
-        holder.logo.setImageResource(images[position]);
+        Job job = jobList.get(position);
+
+        holder.title.setText(job.getJobTitle());
+        holder.companyName.setText(job.getCompanyName());
+        holder.location.setText(job.getJobLocation());
+
+        // Set the tier image based on the imageURL
+        setJobLogo(holder.jobLogo, job.getTier());
+    }
+
+    private void setJobLogo(ImageView jobLogo, String imageURL) {
+        String tier = getTierFromImageURL(imageURL);
+
+        if (tier != null && !tier.isEmpty()) {
+            Log.d("TierDebug", "Tier: " + tier);
+
+            String imageName = tier.toLowerCase() + "tier"; // Assuming the image names are atier, btier, ctier
+            int imageResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+            Glide.with(context).load(imageResourceId).into(jobLogo);
+        } else {
+            Log.e("TierDebug", "tier is null or empty: " + imageURL);
+        }
+    }
+
+
+    private String getTierFromImageURL(String imageURL) {
+        Log.d("TierDebug", "Received imageURL: " + imageURL);
+
+        String trimmedURL = imageURL.trim();
+        return trimmedURL;
     }
 
     @Override
     public int getItemCount() {
-
-        return data2.length;
+        return jobList.size();
     }
 
-    class viewHolder extends RecyclerView.ViewHolder{
+    class viewHolder extends RecyclerView.ViewHolder {
         public TextView title, companyName, location;
-        ImageView logo;
-        public viewHolder(@NonNull View itemView){
-            super (itemView);
+        public ImageView jobLogo;
+
+        public viewHolder(@NonNull View itemView) {
+            super(itemView);
             title = itemView.findViewById(R.id.job_title);
             companyName = itemView.findViewById(R.id.company_name);
             location = itemView.findViewById(R.id.job_location);
-            logo = itemView.findViewById(R.id.job_logo);
+            jobLogo = itemView.findViewById(R.id.job_logo);
         }
     }
 }

@@ -3,29 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/csLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".JobOpeningsFragment">
+    tools:context=".UsersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecycleJobPosts"
+        android:id="@+id/RecyclerUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnCreateJob"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="36dp"
-        android:foreground="@drawable/circle_btn"
-        android:text="new"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
