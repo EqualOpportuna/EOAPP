@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FEFEFE"
     tools:context=".StoriesForum">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ForumRecycler"
-        android:layout_width="397dp"
-        android:layout_height="521dp"
+        android:layout_width="405dp"
+        android:layout_height="648dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
