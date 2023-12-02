@@ -17,35 +17,37 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/search_view"
         android:hint="@string/search_here"
-        app:layout_constraintBottom_toTopOf="@+id/RecycleJobPosts"
+        app:layout_constraintBottom_toTopOf="@+id/CourseRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecycleJobPosts"
+        android:id="@+id/CourseRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+
+    <!--    for department selection-->
     <Button
         android:id="@+id/btnCreateJob"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="36dp"
-        android:foreground="@drawable/circle_btn"
+        android:foreground="@drawable/apex"
         android:text="new"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <!--    for department selection-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

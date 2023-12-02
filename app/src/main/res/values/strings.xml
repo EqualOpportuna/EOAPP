@@ -66,6 +66,38 @@
         <item>testing testing testing</item>
     </string-array>
 
+    <string-array name="TVcourseName">
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+
+
+    </string-array>
+
+    <string-array name="TVcourseDate">
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+
+    </string-array>
+
+    <string-array name="TVcourseFeedback">
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+        <item> </item>
+
+    </string-array>
+
+
     <string name="string1">Welcome to EOApp!</string>
     <string name="string2">Forgot your password or e-mail</string>
     <string name="string3">change login method</string>

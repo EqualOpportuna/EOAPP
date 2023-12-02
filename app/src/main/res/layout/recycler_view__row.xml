@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -13,6 +13,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
+        android:rotationX="3"
         app:cardBackgroundColor="#F2E0DC"
         app:cardCornerRadius="40dp"
         app:cardElevation="8dp"
@@ -35,44 +36,44 @@
                 android:padding="5dp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView8"
+                app:layout_constraintEnd_toStartOf="@+id/TVcourseName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/TVcourseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="11dp"
                 android:text="@string/date"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintStart_toStartOf="@+id/TVcourseName"
+                app:layout_constraintTop_toBottomOf="@+id/TVcourseName" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/TVcourseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="92dp"
                 android:layout_marginBottom="7dp"
                 android:text="@string/name"
                 android:textSize="36sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
-                app:layout_constraintEnd_toStartOf="@+id/textView9"
+                app:layout_constraintBottom_toTopOf="@+id/TVcourseDate"
+                app:layout_constraintEnd_toStartOf="@+id/TVcourseFeedback"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/TVcourseFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="29dp"
                 android:text="@string/feedback"
-                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintBottom_toBottomOf="@+id/TVcourseDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
+                app:layout_constraintStart_toEndOf="@+id/TVcourseName"
+                app:layout_constraintTop_toTopOf="@+id/TVcourseDate" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

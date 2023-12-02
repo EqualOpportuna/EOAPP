@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
         android:id="@+id/btnCreateJob"
         android:layout_width="80dp"

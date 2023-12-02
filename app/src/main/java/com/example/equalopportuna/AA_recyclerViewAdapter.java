@@ -10,15 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter.MyViewHolder> {
     Context context;
-    ArrayList<Model> ModelIs;
+    List<Model> ModelIs;
 
-    public AA_recyclerViewAdapter(Context context, ArrayList<Model> ModelIS){
+    public AA_recyclerViewAdapter(Context context, List<Model> ModelIS){
         this.context = context;
         this.ModelIs = ModelIS;
+    }
+
+    public AA_recyclerViewAdapter(crouseCardView context, List<Model> course) {
     }
 
     @NonNull
@@ -31,9 +34,9 @@ class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tvName.setText(ModelIs.get(position).getName());
-        holder.tvFeedback.setText(ModelIs.get(position).getFeedback());
-        holder.tvDate.setText(ModelIs.get(position).getDate());
+        holder.tvName.setText(ModelIs.get(position).getCourseName());
+        holder.tvFeedback.setText(ModelIs.get(position).getCourseFeedback());
+        holder.tvDate.setText(ModelIs.get(position).getCourseDate());
         holder.imageView.setImageResource(ModelIs.get(position).getImage());
 
     }
@@ -52,9 +55,9 @@ class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView4);
-            tvName = itemView.findViewById(R.id.textView8);
-            tvDate = itemView.findViewById(R.id.textView6);
-            tvFeedback = itemView.findViewById(R.id.textView9);
+            tvName = itemView.findViewById(R.id.TVcourseName);
+            tvDate = itemView.findViewById(R.id.TVcourseDate);
+            tvFeedback = itemView.findViewById(R.id.TVcourseFeedback);
         }
     }
 
