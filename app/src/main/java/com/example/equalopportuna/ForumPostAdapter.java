@@ -25,7 +25,7 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     @NonNull
     @Override
     public ForumPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.activity_storiesforum_layout, parent, false);
+        View view = inflater.inflate(R.layout.layout_storiesforum, parent, false);
         return new ForumPostViewHolder(view);
     }
 

@@ -29,7 +29,7 @@ public class JobPost_adapter extends RecyclerView.Adapter<JobPost_adapter.viewHo
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.jobpost_layout, parent, false);
+        View view = inflater.inflate(R.layout.layout_jobpost, parent, false);
         return new viewHolder(view);
     }
 
