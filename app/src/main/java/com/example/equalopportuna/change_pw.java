@@ -62,8 +62,7 @@ public class change_pw extends AppCompatActivity {
         }
 
         if (isEmailRegistered(email)) {
-            showToast("Email is already registered");
-            return false;
+            return true;
         }
 
         if (!NewPassword.equals(confNewPassword)) {
