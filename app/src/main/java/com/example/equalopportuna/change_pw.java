@@ -21,7 +21,7 @@ public class change_pw extends AppCompatActivity {
     private EditText etemail,etconfNewPassword,etnewpassword,etcurrentpw;
     private Button btnproceed,btnback;
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_pw);
