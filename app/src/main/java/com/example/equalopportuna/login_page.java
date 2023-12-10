@@ -15,7 +15,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class login_page extends AppCompatActivity {
 
@@ -24,8 +23,8 @@ public class login_page extends AppCompatActivity {
     private TextView registerTextView, forgotPasswordTextView;
 
     private UserManager userManager;
-
     private Job jobs;
+    private StoryManager storyManager; // Add StoryManager instance
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,8 +37,9 @@ public class login_page extends AppCompatActivity {
         registerTextView = findViewById(R.id.tv_or_signup);
         forgotPasswordTextView = findViewById(R.id.tv_forgot_password);
 
-        // Use the singleton pattern to share the UserManager
+        // Initialize instances
         userManager = UserManager.getInstance(this);
+        storyManager = StoryManager.getInstance(this); // Initialize StoryManager
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +104,10 @@ public class login_page extends AppCompatActivity {
                     // Set user information in UserViewModel
                     userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth);
                     jobs.fetchAndStoreJobData(connection);
+
+                    // Fetch and store stories using StoryManager
+                    storyManager.fetchAndStoreStoryData(this, connection);
+
                     showToast("Logged in successfully");
                     navigateToMainPage();
                 } else {
