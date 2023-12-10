@@ -67,33 +67,33 @@
     </string-array>
 
     <string-array name="TVcourseName">
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
+        <item>name1</item>
+        <item>name2</item>
+        <item>name3</item>
+        <item>name4</item>
+        <item>name5</item>
+        <item>name6</item>
 
 
     </string-array>
 
     <string-array name="TVcourseDate">
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
+        <item>date1</item>
+        <item>date2</item>
+        <item>date3</item>
+        <item>date4</item>
+        <item>date5</item>
+        <item>date6</item>
 
     </string-array>
 
     <string-array name="TVcourseFeedback">
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
-        <item> </item>
+        <item>feedback1</item>
+        <item>feedback2</item>
+        <item>feedback3</item>
+        <item>feedback4</item>
+        <item>feedback5</item>
+        <item>feedback6</item>
 
     </string-array>
 

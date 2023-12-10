@@ -15,6 +15,9 @@ public class Model {
     }
 
     public Model(String courseName, String courseDate, String courseFeedback) {
+        this.courseName = courseName;
+        this.courseDate = courseDate;
+        this.courseFeedback= courseFeedback;
     }
 
     public String getCourseName(){return courseName;}
@@ -24,5 +27,6 @@ public class Model {
     public int getImage() {
         return image;
     }
+
 }
 

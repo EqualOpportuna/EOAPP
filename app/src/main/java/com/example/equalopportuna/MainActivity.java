@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.courses_icon) {
                     // Navigate to AboutAppFragment using Navigation Component
                     Navigation.findNavController(MainActivity.this, R.id.NHFMain)
-                            .navigate(R.id.recycleView);
+                            .navigate(R.id.courselistingFragment);
                     return true;
                 }
 

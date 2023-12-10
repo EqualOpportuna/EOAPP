@@ -7,28 +7,11 @@
     android:background="#FFFFFF"
     tools:context=".JobOpeningsFragment">
 
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/search_view"
-        android:hint="@string/search_here"
-        app:layout_constraintBottom_toTopOf="@+id/CourseRecycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/CourseRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
