@@ -24,9 +24,13 @@
         android:name="com.example.equalopportuna.StoriesForumFragment"
         android:label="StoriesForumFragment" />
     <fragment
-        android:id="@+id/recycleView"
+        android:id="@+id/courselistingFragment"
         android:name="com.example.equalopportuna.courselistingFragment"
-        android:label="courselistingFragment" />
+        android:label="courselistingFragment" >
+        <action
+            android:id="@+id/action_courselistingFragment_to_departmentSelectionFragment"
+            app:destination="@id/departmentSelectionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/Users"
         android:name="com.example.equalopportuna.UsersFragment"
@@ -53,4 +57,8 @@
             android:id="@+id/action_Community_chat"
             app:destination="@id/Chats" />
     </fragment>
+    <fragment
+        android:id="@+id/departmentSelectionFragment"
+        android:name="com.example.equalopportuna.departmentSelectionFragment"
+        android:label="departmentSelectionFragment" />
 </navigation>

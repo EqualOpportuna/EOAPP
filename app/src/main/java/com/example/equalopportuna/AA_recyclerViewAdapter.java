@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter.MyViewHolder> {
+public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter.MyViewHolder> {
     Context context;
     List<Model> ModelIs;
 
@@ -21,8 +21,7 @@ class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerViewAdapter
         this.ModelIs = ModelIS;
     }
 
-    public AA_recyclerViewAdapter(crouseCardView context, List<Model> course) {
-    }
+
 
     @NonNull
     @Override
