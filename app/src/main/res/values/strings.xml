@@ -67,12 +67,14 @@
     </string-array>
 
     <string-array name="TVcourseName">
+
         <item>name1</item>
         <item>name2</item>
         <item>name3</item>
         <item>name4</item>
         <item>name5</item>
         <item>name6</item>
+
 
 
     </string-array>
