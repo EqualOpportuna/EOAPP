@@ -43,7 +43,7 @@ public class Community extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new UsersFragment(), "Users");
         adapter.addFragment(new FriendsFragment(), "Friends");
-        adapter.addFragment(new chat(), "Chat");
+        adapter.addFragment(new chatFragment(), "Chat");
         viewPager.setAdapter(adapter);
     }
 

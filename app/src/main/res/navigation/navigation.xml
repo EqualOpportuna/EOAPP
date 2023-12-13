@@ -41,7 +41,7 @@
         android:label="Friends"/>
     <fragment
         android:id="@+id/Chats"
-        android:name="com.example.equalopportuna.chat"
+        android:name="com.example.equalopportuna.chatFragment"
         android:label="Users"/>
     <fragment
         android:id="@+id/fragment_community"
