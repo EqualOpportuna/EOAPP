@@ -33,8 +33,8 @@ public class chatFragment extends Fragment {
 
         RecyclerChat = view.findViewById(R.id.RecyclerChat); // Use RecyclerChat
 
-        // Fetch chat data from the static list (Replace this with your actual data fetching logic)
-        List<chatFragment> chatList = getChatList();
+        // Fetch com.example.equalopportuna.chat data from the static list
+        List<chat> chatList = chat.getChatList();
 
         // RecyclerView adapter
         chat_adapter chatAdapter = new chat_adapter(chatList, requireContext());
@@ -44,27 +44,20 @@ public class chatFragment extends Fragment {
         return view;
     }
 
-    // Add getter methods or replace this with your actual data fetching logic
     private List<chatFragment> getChatList() {
-        // Replace this with your actual data fetching logic
-        // For example, you might fetch chat data from a database or API
-        // and return a list of chatFragment objects.
+
         return null;
     }
 
-    // Add getter methods or replace this with your actual data
     public String getUsername() {
-        // Replace this with your actual username logic
         return "Username";
     }
 
     public String getChatPreview() {
-        // Replace this with your actual chat preview logic
         return "You: hahaha glhf!";
     }
 
     public String getChatDate() {
-        // Replace this with your actual chat date logic
         return "Dec 4";
     }
 }

@@ -15,10 +15,10 @@ import java.util.List;
 
 public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHolder> {
 
-    private List<chatFragment> chatList;
+    private List<chat> chatList;
     private Context context;
 
-    public chat_adapter(List<chatFragment> chatList, Context context) {
+    public chat_adapter(List<chat> chatList, Context context) {
         this.chatList = chatList;
         this.context = context;
     }
@@ -32,11 +32,12 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-        chatFragment chatItem = chatList.get(position);
+        chat chatItem = chatList.get(position);
 
         holder.username.setText(chatItem.getUsername());
         holder.chatPreview.setText(chatItem.getChatPreview());
         holder.chatDate.setText(chatItem.getChatDate());
+        holder.profilePic.setImageResource(chatItem.getImageUrl());
 
     }
 

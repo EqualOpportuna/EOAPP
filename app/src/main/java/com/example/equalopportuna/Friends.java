@@ -39,9 +39,9 @@ public class Friends {
         List<Friends> userList = new ArrayList<>();
 
         // testing with sample data
-        userList.add(new Friends("Lay How Ye", "Engineer", R.drawable.profile_image1, 3));
-        userList.add(new Friends("Xiu Mui Mui", "Designer", R.drawable.profile_image2, 7));
-        userList.add(new Friends("Ding Ngo Fai", "Developer", R.drawable.profile_image3, 1));
+        userList.add(new Friends("Lay How Ye", "Engineer", R.drawable.profile_image2, 3));
+        userList.add(new Friends("Xiu Mui Mui", "Designer", R.drawable.profile_image3, 7));
+        userList.add(new Friends("Ding Ngo Fai", "Developer", R.drawable.profile_image1, 1));
 
         return userList;
     }
