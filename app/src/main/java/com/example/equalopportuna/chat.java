@@ -26,7 +26,7 @@ public class chat {
         List<chat> chatList = new ArrayList<>();
 
         // testing with sample data
-        chatList.add(new chat("Pak Gai Hong", "You: alright thanks for the tip!", "4 Dec", R.drawable.profile_image3));
+        chatList.add(new chat("Xiu Gai Bei", "You: alright thanks for the tip!", "4 Dec", R.drawable.profile_image3));
         chatList.add(new chat("Rendang Ismail", "Rendang: best wishes and good luck!", "19 Nov", R.drawable.profile_image1));
         chatList.add(new chat("Muthu", "Muthu: spill the tea sis", "31 Feb", R.drawable.profile_image2));
 
