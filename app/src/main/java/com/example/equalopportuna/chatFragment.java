@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,11 +30,11 @@ public class chatFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chat, container, false); // Use fragment_chat.xml
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        RecyclerChat = view.findViewById(R.id.RecyclerChat); // Use RecyclerChat
+        RecyclerChat = view.findViewById(R.id.RecyclerChat);
 
-        // Fetch com.example.equalopportuna.chat data from the static list
+        // Fetch data from the static list
         List<chat> chatList = chat.getChatList();
 
         // RecyclerView adapter
@@ -47,6 +48,13 @@ public class chatFragment extends Fragment {
     private List<chatFragment> getChatList() {
 
         return null;
+    }
+    private void navigateToChatHistFragment() {
+        FragmentManager fragmentManager = getParentFragmentManager(); // or getActivity().getSupportFragmentManager()
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_chat, new ChatHistFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     public String getUsername() {

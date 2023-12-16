@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -39,11 +41,26 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
         holder.chatDate.setText(chatItem.getChatDate());
         holder.profilePic.setImageResource(chatItem.getImageUrl());
 
+        // Set click listener for the cardView
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToChatHistFragment();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return chatList.size();
+    }
+
+    private void navigateToChatHistFragment() {
+        FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_community, new ChatHistFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder {

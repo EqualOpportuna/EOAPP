@@ -32,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Label for Users Fragment -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Label for Friends Fragment -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Label for Chat Fragment -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
