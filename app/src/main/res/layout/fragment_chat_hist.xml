@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEFE">
+
+
+    <RelativeLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ECCDD0">
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/chatListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/messageInputLayout"
+        android:layout_below="@+id/headerLayout"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8dp"
+        android:padding="8dp"/>
+
+    <!-- Message Input Layout -->
+    <RelativeLayout
+        android:id="@+id/messageInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <!-- Message Input EditText -->
+        <EditText
+            android:id="@+id/messageEditText"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_toStartOf="@+id/sendButton"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="8dp"
+            android:background="@drawable/rectangle"
+            android:hint="Type a message"/>
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:background="#00FFFFFF"
+            android:foreground="@drawable/send_btn"
+            android:padding="10dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
