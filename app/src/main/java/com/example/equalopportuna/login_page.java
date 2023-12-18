@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class login_page extends AppCompatActivity {
 
@@ -107,6 +108,13 @@ public class login_page extends AppCompatActivity {
 
                     // Fetch and store stories using StoryManager
                     storyManager.fetchAndStoreStoryData(this, connection);
+
+                    String loggedInFullName = userManager.getFullName();
+                    List<Users> allUsers = Users.getAllUsers();
+                    if (allUsers.isEmpty()) {
+                        allUsers = Users.getAllUsersFromDatabase(connection, loggedInFullName);
+                        Users.setAllUsers(allUsers);
+                    }
 
                     showToast("Logged in successfully");
                     navigateToMainPage();

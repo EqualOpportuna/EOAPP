@@ -29,25 +29,25 @@ public class UsersFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_users, container, false);
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
         RecyclerUsers = view.findViewById(R.id.RecyclerUser);
 
-        // Fetch job data from the static list
-        List<Users> UsersList = Users.getUserList();
+        // Use the stored list of users
+        List<Users> UsersList = Users.getAllUsers();
 
         // RecyclerView adapter
         user_adapter adp = new user_adapter(requireContext(), UsersList);
         RecyclerUsers.setAdapter(adp);
-        RecyclerUsers.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        //GridLayoutManager -- arrange 2 items per row
+        // Use either LinearLayoutManager or GridLayoutManager based on your preference
+        RecyclerUsers.setLayoutManager(new LinearLayoutManager(requireContext()));
+        // or
         int spanCount = 2;
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), spanCount);
         RecyclerUsers.setLayoutManager(layoutManager);
 
         return view;
     }
+
 }
