@@ -1,8 +1,11 @@
 package com.example.equalopportuna;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,17 +25,37 @@ import java.util.Random;
 
 public class forgot_pw_email  extends AppCompatActivity {
     int code;
-    EditText passCode1;
-    EditText passCode2;
-    EditText passCode3;
-    EditText passCode4;
+    private EditText etemail,etotp;
+    private Button btnchange;
+    private Button btnback;
+
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_pw);
+
+        etemail = findViewById(R.id.et_email);
+        etotp = findViewById(R.id.et_otp);
+        Button btnproceed = findViewById(R.id.btn_proceed);
+        btnchange = findViewById(R.id.btn_change);
+
+        TextView btnback= findViewById(R.id.or_login);
+        btnback.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(forgot_pw_email.this,login_page.class));
+            }
+        });
+
+        btnproceed.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View V){
+                sendVerifyEmail();
+                checkCode();
+            }
+        });
+
     }
 
-    public void sendVerifyEmail(View view){
+    public void sendVerifyEmail(){
         Random random = new Random();
         code = random.nextInt(8999)+1000;
         EditText emailTXT = findViewById(R.id.et_email);
@@ -62,7 +85,7 @@ public class forgot_pw_email  extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void checkCode(View view){
+    public void checkCode(){
         String inputCode = String.valueOf(findViewById(R.id.et_otp));
         if(inputCode.equals(String.valueOf(code))){
             Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show();

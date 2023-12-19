@@ -17,7 +17,7 @@
         tools:targetApi="34">
 
         <activity
-            android:name=".forgot_pw_email"
+            android:name=".sign_up"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
