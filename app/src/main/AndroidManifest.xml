@@ -17,7 +17,7 @@
         tools:targetApi="34">
 
         <activity
-            android:name=".sign_up"
+            android:name=".forgot_pw_email"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +28,8 @@
         <activity android:name=".MainActivity" />
 
         <activity android:name=".login_page" />
+
+
 
 
     </application>
