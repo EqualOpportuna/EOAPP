@@ -1,6 +1,5 @@
 package com.example.equalopportuna;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +15,19 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
 
     private final List<ForumPostNew> forumPosts;
     private final LayoutInflater inflater;
+    private OnCommentButtonClickListener onCommentButtonClickListener;
 
+    public interface OnCommentButtonClickListener {
+        void onCommentButtonClick(int position);
+    }
+
+    public void setOnCommentButtonClickListener(OnCommentButtonClickListener listener) {
+        this.onCommentButtonClickListener = listener;
+    }
     public ForumPostAdapter(Context context, List<ForumPostNew> forumPosts) {
         this.inflater = LayoutInflater.from(context);
         this.forumPosts = forumPosts;
     }
-
     @NonNull
     @Override
     public ForumPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +39,16 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     public void onBindViewHolder(@NonNull ForumPostViewHolder holder, int position) {
         ForumPostNew currentPost = forumPosts.get(position);
         holder.bind(currentPost);
+
+        holder.cmtBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Trigger the listener callback
+                if (onCommentButtonClickListener != null) {
+                    onCommentButtonClickListener.onCommentButtonClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -44,11 +60,13 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
 
         private final TextView usernameTextView;
         private final TextView messageTextView;
+        private final TextView cmtBTN;
 
         public ForumPostViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameTextView = itemView.findViewById(R.id.TVforumUsername);
             messageTextView = itemView.findViewById(R.id.TVforumPost);
+            cmtBTN = itemView.findViewById(R.id.cmtBTN);
         }
 
         public void bind(ForumPostNew post) {
