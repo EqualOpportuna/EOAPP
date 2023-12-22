@@ -1,4 +1,3 @@
-// StoriesForumFragment.java
 package com.example.equalopportuna;
 
 import android.os.Bundle;
@@ -7,18 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class StoriesForumFragment extends Fragment {
+public class StoriesForumFragment extends Fragment implements ForumPostAdapter.OnCommentButtonClickListener {
 
     private ForumPostAdapter adapter;
     private StoryManager storyManager;
 
     public StoriesForumFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCommentButtonClick(int position, View view) {
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(R.id.storiesCommentFragment);
     }
 
     @Override
@@ -34,6 +41,7 @@ public class StoriesForumFragment extends Fragment {
         List<ForumPostNew> forumPosts = StoryManager.getStoryList();
 
         adapter = new ForumPostAdapter(getActivity(), forumPosts);
+        adapter.setOnCommentButtonClickListener(this); // Set the listener
         recyclerView.setAdapter(adapter);
 
         return view;

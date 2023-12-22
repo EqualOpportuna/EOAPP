@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -18,16 +20,18 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     private OnCommentButtonClickListener onCommentButtonClickListener;
 
     public interface OnCommentButtonClickListener {
-        void onCommentButtonClick(int position);
+        void onCommentButtonClick(int position, View view);
     }
 
     public void setOnCommentButtonClickListener(OnCommentButtonClickListener listener) {
         this.onCommentButtonClickListener = listener;
     }
+
     public ForumPostAdapter(Context context, List<ForumPostNew> forumPosts) {
         this.inflater = LayoutInflater.from(context);
         this.forumPosts = forumPosts;
     }
+
     @NonNull
     @Override
     public ForumPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,7 +49,7 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             public void onClick(View view) {
                 // Trigger the listener callback
                 if (onCommentButtonClickListener != null) {
-                    onCommentButtonClickListener.onCommentButtonClick(position);
+                    onCommentButtonClickListener.onCommentButtonClick(position, view);
                 }
             }
         });
@@ -74,4 +78,6 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             messageTextView.setText(post.getMessage());
         }
     }
+
+
 }
