@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "113218491523",
+    "project_id": "equalopportunaapp",
+    "storage_bucket": "equalopportunaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113218491523:android:f0be3f4771875bcd7df7b6",
+        "android_client_info": {
+          "package_name": "com.example.equalopportuna"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0MfOycLRi9-GvZghddnd4vJ_JS3hQQ1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

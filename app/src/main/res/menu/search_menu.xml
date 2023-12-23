@@ -4,8 +4,15 @@
     <item android:id="@+id/search"
         android:title="Search..."
         android:icon="@drawable/ic_search"
+
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item android:id="@+id/bell"
+        android:title=""
+        android:icon="@drawable/belldisactive"
+        app:showAsAction="always"
+        />
 
     <item android:id="@+id/Community"
         android:title="Community"
