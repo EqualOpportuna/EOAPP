@@ -127,6 +127,7 @@
     <string name="date">date\n</string>
     <string name="todo" />
     <string name="feedback">feedback\n</string>
+    <string name="type_a_message">Type a message</string>
 
 
 </resources>

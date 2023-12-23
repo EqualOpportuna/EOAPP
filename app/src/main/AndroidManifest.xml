@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EqualOpportuna"
         tools:targetApi="34">
-
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".sign_up"
             android:exported="true">
@@ -26,10 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-
         <activity android:name=".login_page" />
-
-
     </application>
 
 </manifest>
