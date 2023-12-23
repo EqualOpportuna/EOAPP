@@ -9,6 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +24,19 @@ public class sign_up extends AppCompatActivity {
     private Button signUpButton;
     private EditText etName, etEmail, etAge, etPassword, etConfPassword;
 
+    private FirebaseDatabase db;
+    private DatabaseReference usersRef;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseApp.initializeApp(this);
+        db = FirebaseDatabase.getInstance("https://equalopportunaapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        usersRef = db.getReference("users");
+
+
+
         setContentView(R.layout.sign_up);
 
         signUpButton = findViewById(R.id.btn_register);
@@ -156,6 +171,10 @@ public class sign_up extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String age = etAge.getText().toString().trim();
         String password = etPassword.getText().toString();
+
+        HelperClass helperClass = new HelperClass(name, email);
+        //DatabaseReference newUserRef = usersRef.push(); // Create a new child under 'users'
+        usersRef.child(name).setValue(helperClass);
 
         Database database = new Database();
         Connection connection = database.SQLConnection();

@@ -27,7 +27,7 @@
 
         <EditText
             android:id="@+id/ETsearch"
-            android:layout_width="280sp"
+            android:layout_width="180sp"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle"
             android:backgroundTint="#F2E0DC"
