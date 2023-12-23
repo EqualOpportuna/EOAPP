@@ -24,9 +24,18 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
 
     @Override
     public void onCommentButtonClick(int position, View view) {
+        ForumPostNew currentPost = adapter.getItem(position);
+
+        // Create a Bundle to pass data to the fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("username", currentPost.getUsername());
+        bundle.putString("message", currentPost.getMessage());
+
+        // Navigate to StoriesCommentFragment and pass the Bundle
         NavController navController = NavHostFragment.findNavController(this);
-        navController.navigate(R.id.storiesCommentFragment);
+        navController.navigate(R.id.storiesCommentFragment, bundle);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
