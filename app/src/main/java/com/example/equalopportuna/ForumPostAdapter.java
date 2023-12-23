@@ -24,7 +24,9 @@ import java.util.List;
 
 public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.ForumPostViewHolder> {
 
-    private final List<ForumPostNew> forumPosts;
+    private List<ForumPostNew> forumPosts;
+
+
     private final LayoutInflater inflater;
     private OnCommentButtonClickListener onCommentButtonClickListener;
 
@@ -32,6 +34,9 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         void onCommentButtonClick(int position, View view);
     }
 
+    public void setForumPosts(List<ForumPostNew> forumPosts) {
+        this.forumPosts = forumPosts;
+    }
     public void setOnCommentButtonClickListener(OnCommentButtonClickListener listener) {
         this.onCommentButtonClickListener = listener;
     }

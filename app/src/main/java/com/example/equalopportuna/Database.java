@@ -92,6 +92,28 @@
             }
         }
 
+        public void insertStory(String username, String message) {
+            try {
+                if (con == null || con.isClosed()) {
+                    con = SQLConnection();
+                }
+
+                if (con != null) {
+                    // Get user_id from the username
+                    String userId = getUserIdByUsername(username);
+
+                    if (userId != null) {
+                        Statement stmt = con.createStatement();
+                        String query = "INSERT INTO stories (user_id, message) VALUES (" + userId + ", '" + message + "')";
+                        stmt.executeUpdate(query);
+                        stmt.close();
+                    }
+                }
+            } catch (SQLException e) {
+                Log.e("Error", "Error inserting story into the database: " + e.getMessage());
+            }
+        }
+
 
 
 
