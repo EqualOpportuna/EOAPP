@@ -15,10 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Document;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,6 +46,9 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     public ForumPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.layout_storiesforum, parent, false);
         return new ForumPostViewHolder(view);
+    }
+    public ForumPostNew getItem(int position) {
+        return forumPosts.get(position);
     }
 
     @Override
@@ -86,6 +87,7 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         private final TextView cmtBTN;
         private final TextView downloadBTN;
 
+
         public ForumPostViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameTextView = itemView.findViewById(R.id.TVforumUsername);
@@ -110,7 +112,6 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         // Create a PDF document
         createPdfDocument(context, publisher, story);
     }
-
 
     private void createPdfDocument(Context context, String publisher, String story) {
         PdfDocument pdfDocument = new PdfDocument();
