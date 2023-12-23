@@ -41,7 +41,6 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
         holder.chatDate.setText(chatItem.getChatDate());
         holder.profilePic.setImageResource(chatItem.getImageUrl());
 
-        // Set click listener for the cardView
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
