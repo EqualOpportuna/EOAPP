@@ -13,6 +13,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -22,6 +25,9 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
     private StoryManager storyManager;
     private UserManager userManager;
     private List<ForumPostNew> forumPosts;
+
+    private FirebaseDatabase db;
+    private DatabaseReference storiesRef;
 
     public StoriesForumFragment() {
         // Required empty public constructor
@@ -60,11 +66,14 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
 
         List<ForumPostNew> forumPosts = StoryManager.getStoryList();
 
-        adapter = new ForumPostAdapter(getActivity(), forumPosts);
+        adapter = new ForumPostAdapter(getActivity(), forumPosts, userManager.getFullName());
         adapter.setOnCommentButtonClickListener(this); // Set the listener
         recyclerView.setAdapter(adapter);
 
         adapter.setOnCommentButtonClickListener(this); // Set the listener
+
+        db = FirebaseDatabase.getInstance("https://equalopportunaapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        storiesRef = db.getReference("stories");
 
 
         Button btnSend = view.findViewById(R.id.BTNsend);
@@ -103,11 +112,12 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
 
             // Clear the EditText after sending the story
             etMessage.getText().clear();
+            storiesRef.child(username).child(message).child("likes").setValue(0);
 
             // You may also want to update your RecyclerView with the new data
             // Assuming StoryManager.getStoryList() gets the updated list of stories
             List<ForumPostNew> updatedForumPosts = StoryManager.getStoryList();
-            adapter.setForumPosts(updatedForumPosts);
+            adapter.setForumPosts(updatedForumPosts, username);
             adapter.notifyDataSetChanged();
         }
     }
