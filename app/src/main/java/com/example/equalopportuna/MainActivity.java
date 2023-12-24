@@ -4,16 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,9 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase db;
@@ -79,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.bell) {
                     // Handle bell action
-                    if (item.getIcon().getConstantState().equals(getResources().getDrawable(R.drawable.belldisactive).getConstantState())) {
+                    if (item.getIcon().getConstantState().equals(getResources().getDrawable(R.drawable.bellinactive).getConstantState())) {
                         // Check if the bell is in the disactive state
                         showToast("No notifications");
                         return true;
@@ -157,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     if (hasPendingRequests) {
                         bellMenuItem.setIcon(R.drawable.bellactive);
                     } else {
-                        bellMenuItem.setIcon(R.drawable.belldisactive);
+                        bellMenuItem.setIcon(R.drawable.bellinactive);
                     }
                 }
             }

@@ -39,5 +39,111 @@
         app:layout_constraintStart_toStartOf="@id/profileImageView"
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
+    <TextView
+        android:id="@+id/TVabout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:text="About"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadButton" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:padding="8dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVabout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/about_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experience"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/career_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Software Engineer"
+                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:id="@+id/career_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I pretend to write code but actually, I don't really know what I'm doing"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        app:cardCornerRadius="10dp"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/about_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Education"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/edu_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="University Malaya"
+                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:id="@+id/edu_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I was a hardworking student with dreams, now I better just shut up and sit down"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
