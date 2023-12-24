@@ -18,6 +18,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -30,12 +36,20 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     private final LayoutInflater inflater;
     private OnCommentButtonClickListener onCommentButtonClickListener;
 
+    private FirebaseDatabase db;
+    private DatabaseReference storiesRef;
+
+    private String username;
+
     public interface OnCommentButtonClickListener {
         void onCommentButtonClick(int position, View view);
     }
 
-    public void setForumPosts(List<ForumPostNew> forumPosts) {
+    public void setForumPosts(List<ForumPostNew> forumPosts, String username) {
         this.forumPosts = forumPosts;
+        this.username = username;
+
+
     }
     public void setOnCommentButtonClickListener(OnCommentButtonClickListener listener) {
         this.onCommentButtonClickListener = listener;
@@ -44,7 +58,19 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     public ForumPostAdapter(Context context, List<ForumPostNew> forumPosts) {
         this.inflater = LayoutInflater.from(context);
         this.forumPosts = forumPosts;
+
+        db = FirebaseDatabase.getInstance("https://equalopportunaapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        storiesRef = db.getReference("stories");
     }
+    public ForumPostAdapter(Context context, List<ForumPostNew> forumPosts, String username) {
+        this.inflater = LayoutInflater.from(context);
+        this.forumPosts = forumPosts;
+        this.username = username;
+
+        db = FirebaseDatabase.getInstance("https://equalopportunaapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        storiesRef = db.getReference("stories");
+    }
+
 
     @NonNull
     @Override
@@ -60,6 +86,8 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     public void onBindViewHolder(@NonNull ForumPostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ForumPostNew currentPost = forumPosts.get(position);
         holder.bind(currentPost);
+        fetchLikesCount(holder, currentPost);
+
 
         holder.cmtBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +106,33 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
                 downloadStory(position, holder.itemView.getContext());
             }
         });
+
+        holder.likeBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleLikeOnClick(holder, position);
+            }
+        });
+
+
     }
+
+    private void fetchLikesCount(ForumPostViewHolder holder, ForumPostNew post) {
+        DatabaseReference likesRef = storiesRef
+                .child(post.getUsername())
+                .child(post.getMessage())
+                .child("likes");
+
+        likesRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().getValue() != null) {
+                long likesCount = (long) task.getResult().getValue();
+
+                // Update the likes count in the TextView directly
+                holder.numberOfLikes.setText(String.valueOf(likesCount));
+            }
+        });
+    }
+
 
     @Override
     public int getItemCount() {
@@ -91,6 +145,9 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         private final TextView messageTextView;
         private final TextView cmtBTN;
         private final TextView downloadBTN;
+        private final TextView likeBTN;
+
+        private final TextView numberOfLikes;
 
 
         public ForumPostViewHolder(@NonNull View itemView) {
@@ -99,6 +156,8 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             messageTextView = itemView.findViewById(R.id.TVforumPost);
             cmtBTN = itemView.findViewById(R.id.cmtBTN);
             downloadBTN = itemView.findViewById(R.id.downloadBTN);
+            likeBTN = itemView.findViewById(R.id.likeBTN);
+            numberOfLikes = itemView.findViewById(R.id.numberOfLikes);
         }
 
         public void bind(ForumPostNew post) {
@@ -158,4 +217,105 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             e.printStackTrace();
         }
     }
+
+    private void handleLikeOnClick(ForumPostViewHolder holder, int position) {
+        ForumPostNew currentPost = forumPosts.get(position);
+
+        if (currentPost == null || currentPost.getUsername() == null || currentPost.getMessage() == null) {
+            // Handle the case where currentPost or its properties are null
+            System.out.println("Error: currentPost or its properties are null");
+            return;
+        }
+
+        String currentUser = username; // Replace with your logic to get the current user's username
+
+        if (currentUser == null) {
+            // Handle the case where currentUser is null
+            System.out.println("Error: currentUser is null");
+            return;
+        }
+
+        DatabaseReference userRef = storiesRef.child(currentPost.getUsername());
+        System.out.println("1");
+
+        if (userRef == null) {
+            // Handle the case where userRef is null
+            System.out.println("Error: userRef is null");
+            return;
+        }
+
+        DatabaseReference postRef = userRef.child(currentPost.getMessage());
+        System.out.println("2");
+
+        if (postRef == null) {
+            // Handle the case where postRef is null
+            System.out.println("Error: postRef is null");
+            return;
+        }
+
+        DatabaseReference likesRef = postRef.child("likes");
+        System.out.println("3");
+        DatabaseReference likesFromUsersRef = postRef.child("likesFromUsers");
+        System.out.println("4");
+
+        if (likesRef == null || likesFromUsersRef == null) {
+            // Handle the case where likesRef or likesFromUsersRef is null
+            System.out.println("Error: likesRef or likesFromUsersRef is null");
+            return;
+        }
+
+        // Check if the current user has already liked the post
+        likesFromUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("5");
+                if (dataSnapshot.getValue() != null && dataSnapshot.child(currentUser).exists()) {
+                    // User has already liked the post, remove the like
+                    System.out.println("User has already liked the post, removing the like");
+                    likesFromUsersRef.child(currentUser).removeValue();
+
+                    // Update the likes count in Firebase
+                    likesRef.get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful() && task1.getResult() != null) {
+                            long likesCount = (long) task1.getResult().getValue();
+
+                            // Update the likes count in Firebase
+                            postRef.child("likes").setValue(likesCount - 1);
+
+                            // Update the likes count in the TextView
+                            holder.numberOfLikes.setText(String.valueOf(likesCount - 1));
+                            System.out.println("Like removed successfully");
+                        }
+                    });
+                } else {
+                    // User hasn't liked the post, add the like
+                    System.out.println("User hasn't liked the post, adding the like");
+                    likesFromUsersRef.child(currentUser).setValue(true);
+
+                    // Update the likes count in Firebase
+                    likesRef.get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful() && task1.getResult() != null) {
+                            long likesCount = (long) task1.getResult().getValue();
+
+                            // Update the likes count in Firebase
+                            postRef.child("likes").setValue(likesCount + 1);
+
+                            // Update the likes count in the TextView
+                            holder.numberOfLikes.setText(String.valueOf(likesCount + 1));
+                            System.out.println("Like added successfully");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("Error: Database operation canceled");
+            }
+        });
+    }
+
+
+
+
 }
