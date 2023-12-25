@@ -18,13 +18,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class change_pw2 extends AppCompatActivity {
-    private EditText etemail,etconfNewPassword,etnewpassword,etcurrentpw;
+    private EditText etemail,etconfNewPassword,etnewpassword;
     private Button btnproceed,btnback;
 
     @SuppressLint("WrongViewCast")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.change_pw);
+        setContentView(R.layout.change_pw2);
 
         etemail = findViewById(R.id.et_email);
         etnewpassword = findViewById(R.id.et_newpassword);
@@ -44,6 +44,7 @@ public class change_pw2 extends AppCompatActivity {
             public void onClick(View v) {
                 if(validateinputs()){
                     changeDatainDatabase();
+                    startActivity(new Intent(change_pw2.this, login_page.class));
                 }
             }
         });
@@ -51,16 +52,15 @@ public class change_pw2 extends AppCompatActivity {
 
     private boolean validateinputs() {
         String email = etemail.getText().toString();
-        String password = etcurrentpw.getText().toString();
         String NewPassword = etnewpassword.getText().toString();
         String confNewPassword = etconfNewPassword.getText().toString();
 
-        if (email.isEmpty() || password.isEmpty() || NewPassword.isEmpty() || confNewPassword.isEmpty()) {
+        if (email.isEmpty() || NewPassword.isEmpty() || confNewPassword.isEmpty()) {
             showToast("Please fill in all fields");
             return false;
         }
 
-        if (isEmailRegistered(email)) {
+        if (!isEmailRegistered(email)) {
             showToast("Email is already registered");
             return false;
         }
@@ -124,7 +124,6 @@ public class change_pw2 extends AppCompatActivity {
 
     private void changeDatainDatabase() {
         String email = etemail.getText().toString().trim();
-        String currentpw = etcurrentpw.getText().toString().trim();
         String newpw = etnewpassword.getText().toString().trim();
 
         Database database = new Database();

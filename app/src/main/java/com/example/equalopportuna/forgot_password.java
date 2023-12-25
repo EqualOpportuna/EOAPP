@@ -1,7 +1,6 @@
 package com.example.equalopportuna;
 
-import static java.lang.Integer.parseInt;
-
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +22,7 @@ import java.util.Random;
 public class forgot_password extends AppCompatActivity {
 
     int code;
+    String code_string;
     public EditText mEmail, mSubject, mMessage;
 
     private Button btnproceed, btnchange;
@@ -54,7 +54,15 @@ public class forgot_password extends AppCompatActivity {
         btnchange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkCode();
+                checkCode(code_string);
+                /*startActivity(new Intent(forgot_password.this, change_pw2.class));*/
+                try{
+                    if(checkCode(code_string)){
+                        startActivity(new Intent(forgot_password.this, change_pw2.class));
+                    }
+                }catch(ActivityNotFoundException e){
+                    showToast("problematic");
+                }
             }
         });
 
@@ -121,24 +129,40 @@ public class forgot_password extends AppCompatActivity {
         //Generate random code
         Random random = new Random();
         code = random.nextInt(899999)+100000;
-        String temp = String.valueOf(code);
+        code_string = String.valueOf(code);
 
         //Send Mail
-        JavaMailAPI javaMailAPI = new JavaMailAPI(this,mail,subject,temp);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this,mail,subject,code_string);
 
         javaMailAPI.execute();
     }
 
-    public void checkCode(){
-        String inputCode = String.valueOf(findViewById(R.id.et_otp));
-        //if(inputCode.equals(String.valueOf(code))){
-        if(code.equals == parseInt(String.valueOf(findViewById(R.id.et_otp)))){
-            Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(forgot_password.this,change_pw.class));
+    public boolean checkCode(String code_string){
+        EditText editText = findViewById(R.id.et_otp);
+        String inputCode = editText.getText().toString();
+        if(inputCode.equals(code_string)){
+            showToast("Success");
+            return true;
         }else{
-            Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show();
+            showToast("Failed");
+            return false;
         }
     }
+
+    /*public boolean checkCode(int inputCode){
+        try{
+            if(inputCode == code){
+                Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show();
+                return true;
+            }else{
+                Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }catch(NumberFormatException e){
+            Toast.makeText(this,"problematic",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }*/
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

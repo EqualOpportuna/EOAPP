@@ -62,7 +62,7 @@ public class login_page extends AppCompatActivity {
         forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("Forgot password clicked");
+                navigateToForgotPassword();
             }
         });
     }
@@ -128,6 +128,12 @@ public class login_page extends AppCompatActivity {
     private void navigateToMainPage() {
         // Start the MainPageActivity
         Intent intent = new Intent(login_page.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void navigateToForgotPassword() {
+        // Start the MainPageActivity
+        Intent intent = new Intent(login_page.this, forgot_password.class);
         startActivity(intent);
     }
 
