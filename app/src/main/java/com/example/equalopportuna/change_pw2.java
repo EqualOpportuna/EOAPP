@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class change_pw extends AppCompatActivity {
+public class change_pw2 extends AppCompatActivity {
     private EditText etemail,etconfNewPassword,etnewpassword,etcurrentpw;
     private Button btnproceed,btnback;
 
@@ -27,7 +27,6 @@ public class change_pw extends AppCompatActivity {
         setContentView(R.layout.change_pw);
 
         etemail = findViewById(R.id.et_email);
-        etcurrentpw = findViewById(R.id.et_currentpw);
         etnewpassword = findViewById(R.id.et_newpassword);
         etconfNewPassword = findViewById(R.id.et_confNewPassword);
         btnproceed = findViewById(R.id.btn_proceed);
@@ -36,7 +35,7 @@ public class change_pw extends AppCompatActivity {
         orLoginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(change_pw.this, login_page.class));
+                startActivity(new Intent(change_pw2.this, login_page.class));
             }
         });
 
@@ -61,7 +60,7 @@ public class change_pw extends AppCompatActivity {
             return false;
         }
 
-        if (!isEmailRegistered(email)) {
+        if (isEmailRegistered(email)) {
             showToast("Email is already registered");
             return false;
         }
