@@ -40,14 +40,14 @@ public class forgot_password extends AppCompatActivity {
         btnproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMail();
+                /*sendMail();
                 findViewById(R.id.box1).setVisibility(View.INVISIBLE);
-                findViewById(R.id.box2).setVisibility(View.VISIBLE);
-                /*if(validateinputs()){
+                findViewById(R.id.box2).setVisibility(View.VISIBLE);*/
+                if(validateinputs()){
                     sendMail();
                     findViewById(R.id.box1).setVisibility(View.GONE);
                     findViewById(R.id.box2).setVisibility(View.VISIBLE);
-                }*/
+                }
             }
         });
 
@@ -83,11 +83,11 @@ public class forgot_password extends AppCompatActivity {
         }
 
         if (isEmailRegistered(email)) {
-            showToast("Email is already registered");
-            return true;
+            showToast("Email is not registered.\nPlease sign up!");
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     private boolean isEmailRegistered(String email) {
