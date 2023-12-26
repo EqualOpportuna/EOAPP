@@ -34,8 +34,10 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".login_page" />
+        <activity android:name=".forgot_password" />
+        <activity android:name=".change_pw2" />
+        <activity android:name=".change_pw" />
         <activity android:name=".ChatActivity" />
-
 
     </application>
 

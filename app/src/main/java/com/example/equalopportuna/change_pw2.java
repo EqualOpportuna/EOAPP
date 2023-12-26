@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,17 +17,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class change_pw extends AppCompatActivity {
-    private EditText etemail,etconfNewPassword,etnewpassword,etcurrentpw;
+public class change_pw2 extends AppCompatActivity {
+    private EditText etemail,etconfNewPassword,etnewpassword;
     private Button btnproceed,btnback;
 
     @SuppressLint("WrongViewCast")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.change_pw);
+        setContentView(R.layout.change_pw2);
 
         etemail = findViewById(R.id.et_email);
-        etcurrentpw = findViewById(R.id.et_currentpw);
         etnewpassword = findViewById(R.id.et_newpassword);
         etconfNewPassword = findViewById(R.id.et_confNewPassword);
         btnproceed = findViewById(R.id.btn_proceed);
@@ -36,7 +35,7 @@ public class change_pw extends AppCompatActivity {
         orLoginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(change_pw.this, login_page.class));
+                startActivity(new Intent(change_pw2.this, login_page.class));
             }
         });
 
@@ -45,6 +44,7 @@ public class change_pw extends AppCompatActivity {
             public void onClick(View v) {
                 if(validateinputs()){
                     changeDatainDatabase();
+                    startActivity(new Intent(change_pw2.this, login_page.class));
                 }
             }
         });
@@ -52,11 +52,10 @@ public class change_pw extends AppCompatActivity {
 
     private boolean validateinputs() {
         String email = etemail.getText().toString();
-        String password = etcurrentpw.getText().toString();
         String NewPassword = etnewpassword.getText().toString();
         String confNewPassword = etconfNewPassword.getText().toString();
 
-        if (email.isEmpty() || password.isEmpty() || NewPassword.isEmpty() || confNewPassword.isEmpty()) {
+        if (email.isEmpty() || NewPassword.isEmpty() || confNewPassword.isEmpty()) {
             showToast("Please fill in all fields");
             return false;
         }
@@ -125,7 +124,6 @@ public class change_pw extends AppCompatActivity {
 
     private void changeDatainDatabase() {
         String email = etemail.getText().toString().trim();
-        String currentpw = etcurrentpw.getText().toString().trim();
         String newpw = etnewpassword.getText().toString().trim();
 
         Database database = new Database();
