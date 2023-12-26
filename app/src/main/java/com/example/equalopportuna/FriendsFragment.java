@@ -35,7 +35,7 @@ public class FriendsFragment extends Fragment {
         RecyclerFriends = view.findViewById(R.id.RecyclerFriends);
 
         // Fetch job data from the static list
-        List<Friends> FriendsList = Friends.getUserList();
+        List<Friends> FriendsList = Friends.getFriendList();
 
         // RecyclerView adapter
         Friends_adapter adp = new Friends_adapter(requireContext(), FriendsList);

@@ -18,6 +18,11 @@
         android:theme="@style/Theme.EqualOpportuna"
         tools:targetApi="34">
 
+
+        <activity
+            android:name=".PendingRequestsActivity"
+            android:exported="false" />
+
         <activity
             android:name=".sign_up"
             android:exported="true">
@@ -32,6 +37,7 @@
         <activity android:name=".forgot_password" />
         <activity android:name=".change_pw2" />
         <activity android:name=".change_pw" />
+        <activity android:name=".ChatActivity" />
 
     </application>
 

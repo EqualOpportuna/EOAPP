@@ -38,12 +38,11 @@ public class Friends_adapter extends RecyclerView.Adapter<Friends_adapter.ViewHo
         Friends user = userList.get(position);
 
         // Set data to views
-        holder.profilePic.setImageResource(user.getImageUrl());
+        int resId = context.getResources().getIdentifier(user.getAvatarName(), "drawable", context.getPackageName());
+        holder.profilePic.setImageResource(resId);
         holder.username.setText(user.getUsername());
         holder.career_desc.setText(user.getCareerDescription());
-        holder.connection_period.setText("Connected " + user.getConnectionPeriod() + " months ago");
-
-        //set onClickListener for button
+        holder.connection_period.setText(user.getConnectionPeriod());
     }
 
     @Override

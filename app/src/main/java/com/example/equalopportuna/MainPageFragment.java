@@ -1,6 +1,7 @@
 package com.example.equalopportuna;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,12 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainPageFragment extends Fragment {
@@ -36,6 +41,26 @@ public class MainPageFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Load the avatar when the fragment is resumed
+        loadAvatar();
+    }
+
+    private void loadAvatar() {
+        // Get user information from UserViewModel
+        int userId = userManager.getUserId();
+        String avatarFileName = userManager.getAvatarFileName(); // Modify this based on your actual implementation
+
+        if (avatarFileName != null) {
+            // Update the profile image view
+            int resId = getResources().getIdentifier(avatarFileName, "drawable", requireActivity().getPackageName());
+            profileImageView.setImageResource(resId);
+        }
+    }
+
     public static MainPageFragment newInstance(String param1, String param2) {
         MainPageFragment fragment = new MainPageFragment();
         Bundle args = new Bundle();
@@ -54,9 +79,6 @@ public class MainPageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        // Initialize UserViewModel
-
     }
 
     @Override
@@ -71,7 +93,8 @@ public class MainPageFragment extends Fragment {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery();
+                // Open a custom picker dialog to let the user choose one of the predefined avatars
+                showAvatarPickerDialog();
             }
         });
 
@@ -83,10 +106,57 @@ public class MainPageFragment extends Fragment {
         return view;
     }
 
-    private void openGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+    private void showAvatarPickerDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Choose Avatar");
+
+        // Array to hold the avatar filenames or paths
+        final String[] avatars = {"profile_image1", "profile_image2", "profile_image3"};
+
+        builder.setItems(avatars, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Handle the avatar selection
+                String selectedAvatar = avatars[which];
+
+                // Save the selected avatar information to the database
+                saveAvatarToDatabase(selectedAvatar);
+                userManager.saveAvatarFileName(selectedAvatar);
+
+                // Update the profile image view
+                loadAvatar(); // Reload the avatar after selecting a new one
+            }
+        });
+
+        builder.show();
     }
+
+    private void saveAvatarToDatabase(String selectedAvatar) {
+        // Assuming you have a Database instance, replace "yourPackageName" with your actual package name
+        Database database = new Database();
+
+        try {
+            Connection connection = database.SQLConnection();
+
+            if (connection != null) {
+                // Get user ID from UserManager (modify this based on your actual implementation)
+                int userId = userManager.getUserId();
+
+                // Update the avatar information in the database
+                String updateQuery = "UPDATE users SET avatar = ? WHERE id = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                    preparedStatement.setString(1, selectedAvatar);
+                    preparedStatement.setInt(2, userId);
+                    preparedStatement.executeUpdate();
+                }
+
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

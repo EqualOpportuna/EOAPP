@@ -11,16 +11,24 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class login_page extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private Button loginButton;
     private TextView registerTextView, forgotPasswordTextView;
+
+    private FirebaseDatabase db;
+    private DatabaseReference friendsRef;
+
 
     private UserManager userManager;
     private Job jobs;
@@ -36,6 +44,10 @@ public class login_page extends AppCompatActivity {
         loginButton = findViewById(R.id.btnLogin);
         registerTextView = findViewById(R.id.tv_or_signup);
         forgotPasswordTextView = findViewById(R.id.tv_forgot_password);
+
+        db = FirebaseDatabase.getInstance("https://equalopportunaapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        friendsRef = db.getReference("friends");
+
 
         // Initialize instances
         userManager = UserManager.getInstance(this);
@@ -88,7 +100,7 @@ public class login_page extends AppCompatActivity {
 
         if (connection != null) {
             try {
-                String query = "SELECT id, full_name, email, date_of_birth FROM users WHERE email = ? AND password = ?";
+                String query = "SELECT id, full_name, email, date_of_birth, career_description, avatar FROM users WHERE email = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, email);
                 preparedStatement.setString(2, password);
@@ -100,13 +112,36 @@ public class login_page extends AppCompatActivity {
                     String fullName = resultSet.getString("full_name");
                     String userEmail = resultSet.getString("email");
                     String dateOfBirth = resultSet.getString("date_of_birth");
+                    String career_desc = resultSet.getString("career_description");
+                    String avatar = resultSet.getString("avatar");
 
                     // Set user information in UserViewModel
-                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth);
+                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth, career_desc,avatar);
                     jobs.fetchAndStoreJobData(connection);
 
                     // Fetch and store stories using StoryManager
                     storyManager.fetchAndStoreStoryData(this, connection);
+
+
+
+                    String loggedInFullName = userManager.getFullName();
+
+                    List<Friends> allFriends = Friends.getAllFriendsFromDatabase(connection, loggedInFullName);
+                    Friends.setAllFriends(allFriends);
+                    chat.getAllChatList();
+
+
+                        List<Users> allUsers = Users.getAllUsersFromDatabase(connection, loggedInFullName);
+                        for(int i = 0; i < allUsers.size(); i++){
+                            for(int j = 0; j  < allFriends.size(); j++){
+                                if(allUsers.get(i).getUsername().equals(allFriends.get(j).getUsername())){
+                                    allUsers.remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                        Users.setAllUsers(allUsers);
+
 
                     showToast("Logged in successfully");
                     navigateToMainPage();
