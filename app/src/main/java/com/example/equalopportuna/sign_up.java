@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class sign_up extends AppCompatActivity {
 
     private Button signUpButton;
-    private EditText etName, etEmail, etAge, etPassword, etConfPassword;
+    private EditText etName, etEmail, etCareerDesc, etAge, etPassword, etConfPassword;
 
     private FirebaseDatabase db;
     private DatabaseReference usersRef;
@@ -42,6 +42,7 @@ public class sign_up extends AppCompatActivity {
         signUpButton = findViewById(R.id.btn_register);
         etName = findViewById(R.id.et_name);
         etEmail = findViewById(R.id.et_email);
+        etCareerDesc = findViewById(R.id.et_career_desc);
         etAge = findViewById(R.id.et_age);
         etPassword = findViewById(R.id.et_password);
         etConfPassword = findViewById(R.id.et_confPassword);
@@ -77,6 +78,11 @@ public class sign_up extends AppCompatActivity {
 
         if (!password.equals(confPassword)) {
             showToast("Passwords do not match");
+            return false;
+        }
+
+        if (isNameRegistered(name)) {
+            showToast("Full name is already registered");
             return false;
         }
 
@@ -169,8 +175,10 @@ public class sign_up extends AppCompatActivity {
     private void insertDataIntoDatabase() {
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
+        String career = etCareerDesc.getText().toString().trim();
         String age = etAge.getText().toString().trim();
         String password = etPassword.getText().toString();
+        String defaultAvatar = "profile_image1";
 
         HelperClass helperClass = new HelperClass(name, email);
         //DatabaseReference newUserRef = usersRef.push(); // Create a new child under 'users'
@@ -181,12 +189,14 @@ public class sign_up extends AppCompatActivity {
 
         if (connection != null) {
             try {
-                String query = "INSERT INTO users (full_name, email, date_of_birth, password) VALUES (?, ?, ?, ?)";
+                String query = "INSERT INTO users (full_name, email, date_of_birth, password, career_description, avatar) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, email);
                 preparedStatement.setString(3, age);
                 preparedStatement.setString(4, password);
+                preparedStatement.setString(5, career);
+                preparedStatement.setString(6, defaultAvatar);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
@@ -205,6 +215,37 @@ public class sign_up extends AppCompatActivity {
         } else {
             showToast("Error connecting to the database");
         }
+    }
+
+    private boolean isNameRegistered(String name) {
+        Database database = new Database();
+        Connection connection = database.SQLConnection();
+
+        if (connection != null) {
+            try {
+                String query = "SELECT * FROM users WHERE full_name = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, name);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    preparedStatement.close();
+                    connection.close();
+                    return true;
+                }
+
+                preparedStatement.close();
+                connection.close();
+
+            } catch (SQLException e) {
+                showToast("Error checking full name in the database: " + e.getMessage());
+            }
+        } else {
+            showToast("Error connecting to the database");
+        }
+
+        return false;
     }
 
     private void showToast(String message) {
