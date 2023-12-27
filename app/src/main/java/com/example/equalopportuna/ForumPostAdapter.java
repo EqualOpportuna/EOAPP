@@ -190,9 +190,23 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         paint.setColor(Color.BLACK);
         paint.setTextSize(12);
 
-        // Add content to the PDF
-        canvas.drawText("Publisher: " + publisher, 50, 50, paint);
-        canvas.drawText("Story: " + story, 50, 70, paint);
+        // Add publisher name to the PDF
+        canvas.drawText("Publisher: " + publisher, 50, 30, paint);
+
+        // Add content to the PDF with line wrapping
+        int startX = 50;
+        int startY = 50;
+        int lineHeight = 25; // Set the desired line height
+        int maxCharactersPerLine = 36;
+        int currentIndex = 0;
+
+        while (currentIndex < story.length()) {
+            int end = Math.min(currentIndex + maxCharactersPerLine, story.length());
+            String line = story.substring(currentIndex, end);
+            canvas.drawText(line, startX, startY, paint);
+            currentIndex += maxCharactersPerLine;
+            startY += lineHeight;
+        }
 
         // Finish the page
         pdfDocument.finishPage(page);
@@ -217,6 +231,8 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             e.printStackTrace();
         }
     }
+
+
 
     private void handleLikeOnClick(ForumPostViewHolder holder, int position) {
         ForumPostNew currentPost = forumPosts.get(position);
