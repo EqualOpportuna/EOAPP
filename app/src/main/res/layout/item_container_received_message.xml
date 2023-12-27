@@ -6,7 +6,7 @@
     android:padding="5dp">
 
     <ImageView
-        android:id="@+id/imageProfile"
+        android:id="@+id/job_logo"
         android:layout_width="25dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -26,7 +26,7 @@
         android:padding="13dp"
         android:textColor="@color/white"
         android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@+id/imageProfile"
+        app:layout_constraintStart_toEndOf="@+id/job_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.7" />
 
