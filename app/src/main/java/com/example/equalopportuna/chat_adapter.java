@@ -39,7 +39,7 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
 
         holder.username.setText(chatItem.getUsername());
         holder.chatPreview.setText(chatItem.getChatPreview());
-        holder.chatDate.setText(chatItem.getChatDate());
+        holder.chatDate.setText(chatItem.getCareerDescription());
         int resId = context.getResources().getIdentifier(chatItem.getAvatarName(), "drawable", context.getPackageName());
         holder.profilePic.setImageResource(resId);
 
