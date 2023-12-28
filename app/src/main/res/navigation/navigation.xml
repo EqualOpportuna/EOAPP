@@ -32,6 +32,15 @@
             app:destination="@id/departmentSelectionFragment" />
     </fragment>
     <fragment
+        android:id="@+id/courseDetails"
+        android:name="com.example.equalopportuna.CourseDetail"
+        android:label="courselistingFragment"
+        tools:layout="@layout/fragment_course_detail">
+        <action
+            android:id="@+id/action_courselistingFragment3_to_courselistingFragment"
+            app:destination="@id/courselistingFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/Users"
         android:name="com.example.equalopportuna.UsersFragment"
         android:label="Users"/>

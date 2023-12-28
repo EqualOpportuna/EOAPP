@@ -39,7 +39,7 @@ public class CreateJobFormFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_job_form, container, false);
 
         ImageButton imageButton = view.findViewById(R.id.imageButton);
-        Button jobPostBtn = view.findViewById(R.id.jobPostBtn);
+        Button jobPostBtn = view.findViewById(R.id.watchBtn);
         tierSpinner = view.findViewById(R.id.tierSpinner); // Add this line to initialize the Spinner
 
         // Initialize EditText fields

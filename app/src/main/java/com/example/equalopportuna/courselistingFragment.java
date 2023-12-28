@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.content.Context;
 import android.widget.Toast;
@@ -81,6 +82,7 @@ public class courselistingFragment extends Fragment {
 
 
         adapter = new AA_recyclerViewAdapter(getActivity(), ModelIs);
+
         recyclerView.setAdapter(adapter);
 
 
