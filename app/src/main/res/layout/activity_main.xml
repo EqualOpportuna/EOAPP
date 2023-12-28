@@ -24,20 +24,6 @@
             android:paddingLeft="20sp"
             app:itemIconTint="#92686C"
             app:menu="@menu/search_menu">
-
-        <EditText
-            android:id="@+id/ETsearch"
-            android:layout_width="280sp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle"
-            android:backgroundTint="#F2E0DC"
-            android:hint="Search..."
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingLeft="20sp"
-            android:textColorHint="#92686C " />
-
     </androidx.appcompat.widget.Toolbar>
 
 

@@ -9,6 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,16 +22,27 @@ import java.sql.SQLException;
 public class sign_up extends AppCompatActivity {
 
     private Button signUpButton;
-    private EditText etName, etEmail, etAge, etPassword, etConfPassword;
+    private EditText etName, etEmail, etCareerDesc, etAge, etPassword, etConfPassword;
+
+    private FirebaseDatabase db;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseApp.initializeApp(this);
+        db = FirebaseDatabase.getInstance("https://equalopportunaapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        usersRef = db.getReference("users");
+
+
+
         setContentView(R.layout.sign_up);
 
         signUpButton = findViewById(R.id.btn_register);
         etName = findViewById(R.id.et_name);
         etEmail = findViewById(R.id.et_email);
+        etCareerDesc = findViewById(R.id.et_career_desc);
         etAge = findViewById(R.id.et_age);
         etPassword = findViewById(R.id.et_password);
         etConfPassword = findViewById(R.id.et_confPassword);
@@ -62,6 +78,11 @@ public class sign_up extends AppCompatActivity {
 
         if (!password.equals(confPassword)) {
             showToast("Passwords do not match");
+            return false;
+        }
+
+        if (isNameRegistered(name)) {
+            showToast("Full name is already registered");
             return false;
         }
 
@@ -154,20 +175,32 @@ public class sign_up extends AppCompatActivity {
     private void insertDataIntoDatabase() {
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
+        String career = etCareerDesc.getText().toString().trim();
         String age = etAge.getText().toString().trim();
         String password = etPassword.getText().toString();
+        String defaultAvatar = "profile_image1";
+        String defaultIntro = "Please add a short introduction here!";
+        String defaultExperienceEducation = "Please add your experience and education.";
+
+        HelperClass helperClass = new HelperClass(name, email);
+        //DatabaseReference newUserRef = usersRef.push(); // Create a new child under 'users'
+        usersRef.child(name).setValue(helperClass);
 
         Database database = new Database();
         Connection connection = database.SQLConnection();
 
         if (connection != null) {
             try {
-                String query = "INSERT INTO users (full_name, email, date_of_birth, password) VALUES (?, ?, ?, ?)";
+                String query = "INSERT INTO users (full_name, email, date_of_birth, password, career_description, avatar, short_intro, experience_education) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, email);
                 preparedStatement.setString(3, age);
                 preparedStatement.setString(4, password);
+                preparedStatement.setString(5, career);
+                preparedStatement.setString(6, defaultAvatar);
+                preparedStatement.setString(7, defaultIntro);
+                preparedStatement.setString(8, defaultExperienceEducation);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
@@ -186,6 +219,37 @@ public class sign_up extends AppCompatActivity {
         } else {
             showToast("Error connecting to the database");
         }
+    }
+
+    private boolean isNameRegistered(String name) {
+        Database database = new Database();
+        Connection connection = database.SQLConnection();
+
+        if (connection != null) {
+            try {
+                String query = "SELECT * FROM users WHERE full_name = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, name);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) {
+                    preparedStatement.close();
+                    connection.close();
+                    return true;
+                }
+
+                preparedStatement.close();
+                connection.close();
+
+            } catch (SQLException e) {
+                showToast("Error checking full name in the database: " + e.getMessage());
+            }
+        } else {
+            showToast("Error connecting to the database");
+        }
+
+        return false;
     }
 
     private void showToast(String message) {

@@ -12,12 +12,12 @@ public class Users {
 
     private String username;
     private String careerDescription;
-    private int imageUrl;
+    private String avatarName;
 
-    public Users(String username, String careerDescription, int imageUrl) {
+    public Users(String username, String careerDescription, String avatarName) {
         this.username = username;
         this.careerDescription = careerDescription;
-        this.imageUrl = imageUrl;
+        this.avatarName = avatarName;
     }
 
     public String getUsername() {
@@ -28,8 +28,8 @@ public class Users {
         return careerDescription;
     }
 
-    public int getImageUrl() {
-        return imageUrl;
+    public String getAvatarName() {
+        return avatarName;
     }
 
     public static List<Users> getAllUsers() {
@@ -46,17 +46,19 @@ public class Users {
 
         if (connection != null) {
             try {
-                String query = "SELECT full_name FROM users";
+                String query = "SELECT full_name, career_description, avatar FROM users";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
                     String username = resultSet.getString("full_name");
+                    String career_desc = resultSet.getString("career_description");
+                    String avatar = resultSet.getString("avatar");
 
                     // Exclude the currently logged-in user
                     if (!username.equals(loggedInFullName)) {
                         // Add other properties as needed
-                        Users user = new Users(username, "Worker", R.drawable.profile_image1);
+                            Users user = new Users(username, career_desc, avatar);
                         usersList.add(user);
                     }
                 }
