@@ -13,16 +13,16 @@
         tools:context=".RegisterFragment">
 
         <TextView
-        android:id="@+id/tv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="sans-serif"
-        android:text="Register"
-        android:textAlignment="center"
-        android:textSize="50sp" />
+            android:id="@+id/tv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif"
+            android:text="Register"
+            android:textAlignment="center"
+            android:textSize="50sp" />
 
         <TextView
             android:id="@+id/tv_subtitle"
@@ -48,6 +48,7 @@
             android:padding="15dp"
             android:textSize="15sp" />
 
+
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
@@ -58,6 +59,21 @@
             android:background="#FEFEFE"
             android:fontFamily="sans-serif-medium"
             android:hint="Email"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textSize="15sp" />
+
+
+        <EditText
+            android:id="@+id/et_career_desc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="#FEFEFE"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Career description"
             android:inputType="textEmailAddress"
             android:padding="15dp"
             android:textSize="15sp" />

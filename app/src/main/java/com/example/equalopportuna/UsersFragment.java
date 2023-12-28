@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +16,8 @@ import java.util.List;
 public class UsersFragment extends Fragment {
     RecyclerView RecyclerUsers;
 
+    private UserManager userManager;
+
     public UsersFragment() {
         // Required empty public constructor
     }
@@ -25,7 +28,8 @@ public class UsersFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);}
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,11 +37,16 @@ public class UsersFragment extends Fragment {
 
         RecyclerUsers = view.findViewById(R.id.RecyclerUser);
 
+        userManager = UserManager.getInstance(requireContext());
+
+        String loggedInUser = userManager.getFullName();
+
+
         // Use the stored list of users
         List<Users> UsersList = Users.getAllUsers();
 
         // RecyclerView adapter
-        user_adapter adp = new user_adapter(requireContext(), UsersList);
+        user_adapter adp = new user_adapter(requireContext(), UsersList, loggedInUser);
         RecyclerUsers.setAdapter(adp);
 
         // Use either LinearLayoutManager or GridLayoutManager based on your preference
@@ -47,7 +56,11 @@ public class UsersFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), spanCount);
         RecyclerUsers.setLayoutManager(layoutManager);
 
+
+
         return view;
     }
+
+
 
 }

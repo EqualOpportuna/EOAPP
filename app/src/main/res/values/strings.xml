@@ -127,6 +127,7 @@
     <string name="date">date\n</string>
     <string name="todo" />
     <string name="feedback">feedback\n</string>
+
     <string name="title_activity_course_details">activity_course_details</string>
     <string name="title_activity_course_detail">activity_course_detail</string>
     <string name="title_activity_main2">MainActivity2</string>
@@ -173,6 +174,8 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <string name="type_a_message">Type a message</string>
 
 
 </resources>

@@ -70,4 +70,8 @@
         android:id="@+id/departmentSelectionFragment"
         android:name="com.example.equalopportuna.departmentSelectionFragment"
         android:label="departmentSelectionFragment" />
+    <fragment
+        android:id="@+id/storiesCommentFragment"
+        android:name="com.example.equalopportuna.StoriesCommentFragment"
+        android:label="Story_Comments"/>
 </navigation>
