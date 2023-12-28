@@ -15,7 +15,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".newJob_form">
+            tools:context=".newJob_form"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="-16dp">
 
 
             <!-- Modify the Button constraints to make space for the Spinner -->
@@ -25,11 +27,12 @@
                 android:layout_width="366dp"
                 android:layout_height="89dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="120dp"
                 android:text="EmpowerHer: Mastering Job Search Strategies for Women"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="112dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/description"
@@ -81,11 +84,12 @@
                 android:id="@+id/watchBtn"
                 android:layout_width="300sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="32dp"
                 android:backgroundTint="#92686C"
                 android:text="Watch Youtube"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="631dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
@@ -109,14 +113,5 @@
             app:layout_constraintTop_toTopOf="@+id/header"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
-        <Button
-            android:id="@+id/jobPostBtn3"
-            android:layout_width="300sp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:backgroundTint="#92686C"
-            android:text="Watch Youtube"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="631dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

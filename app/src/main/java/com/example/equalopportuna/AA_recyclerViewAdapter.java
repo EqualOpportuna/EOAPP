@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -37,9 +38,6 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
 
 
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
 
     @NonNull
     @Override
@@ -48,12 +46,10 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
         View view = inflater.inflate(R.layout.recycler_view__row, parent, false);
         return new MyViewHolder(view);
     }
-    private AdapterView.OnItemClickListener listener;
+
 
     // 设置点击事件的方法
-    public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
-        this.listener = listener;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -65,6 +61,8 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
         holder.imageView.setImageResource(ModelIs.get(position).getImage());
         //position is the corresponding ID in db
         holder.itemView.setOnClickListener((view) -> {
+            System.out.println("yes,clicked");
+            Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, activity_course_details.class);
             intent.putExtra("id",position); // Replace "YOUR_KEY" with your key
             context.startActivity(intent);

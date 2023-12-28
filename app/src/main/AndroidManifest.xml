@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,29 +15,34 @@
         android:roundIcon="@drawable/eq_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.EqualOpportuna"
-
         tools:targetApi="34">
+        <activity
+            android:name=".coursedetails_testing"
+            android:exported="false" />
+        <activity
+            android:name=".activity_course_details"
+            android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".PendingRequestsActivity"
             android:exported="false" />
-        <activity android:name=".sign_up" android:exported="false" />
+        <activity
+            android:name=".sign_up"
+            android:exported="false" />
         <activity android:name=".MainActivity" />
         <activity android:name=".login_page" />
-
         <activity android:name=".forgot_password" />
         <activity android:name=".change_pw2" />
         <activity android:name=".change_pw" />
         <activity android:name=".ChatActivity" />
-
     </application>
 
 </manifest>

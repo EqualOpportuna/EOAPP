@@ -9,11 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import com.example.equalopportuna.databinding.ActivityCourseDetailsBinding;
+
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,8 +19,7 @@ import java.sql.SQLException;
 
 public class activity_course_details extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-private ActivityCourseDetailsBinding binding;
+
 
     String link;
     String description;
@@ -37,6 +33,7 @@ private ActivityCourseDetailsBinding binding;
         if (getIntent().hasExtra("id")) {
             receivedValue = getIntent().getIntExtra("id",0); // Replace "YOUR_KEY" with your key
         }
+        System.out.println(receivedValue);
 
         Database database = new Database();
         Connection connection = database.SQLConnection();
@@ -47,8 +44,8 @@ private ActivityCourseDetailsBinding binding;
 
             while (resultSet.next()) {
                 // 获取每一行的数据
-                link = resultSet.getString("description");
-                description = resultSet.getString("youtube_link");
+                link = resultSet.getString("youtube_link");
+                description = resultSet.getString("description");
                 name  = resultSet.getString("course_name");
                 System.out.println(description);
                 TextView heading = findViewById(R.id.heading);
