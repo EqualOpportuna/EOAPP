@@ -100,7 +100,7 @@ public class login_page extends AppCompatActivity {
 
         if (connection != null) {
             try {
-                String query = "SELECT id, full_name, email, date_of_birth, career_description, avatar FROM users WHERE email = ? AND password = ?";
+                String query = "SELECT id, full_name, email, date_of_birth, career_description, avatar, short_intro, experience_education FROM users WHERE email = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, email);
                 preparedStatement.setString(2, password);
@@ -114,9 +114,11 @@ public class login_page extends AppCompatActivity {
                     String dateOfBirth = resultSet.getString("date_of_birth");
                     String career_desc = resultSet.getString("career_description");
                     String avatar = resultSet.getString("avatar");
+                    String intro = resultSet.getString("short_intro");
+                    String experience_education = resultSet.getString("experience_education");
 
                     // Set user information in UserViewModel
-                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth, career_desc,avatar);
+                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth, career_desc,avatar, intro, experience_education);
                     jobs.fetchAndStoreJobData(connection);
 
                     // Fetch and store stories using StoryManager

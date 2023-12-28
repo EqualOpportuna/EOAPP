@@ -179,6 +179,8 @@ public class sign_up extends AppCompatActivity {
         String age = etAge.getText().toString().trim();
         String password = etPassword.getText().toString();
         String defaultAvatar = "profile_image1";
+        String defaultIntro = "Please add a short introduction here!";
+        String defaultExperienceEducation = "Please add your experience and education.";
 
         HelperClass helperClass = new HelperClass(name, email);
         //DatabaseReference newUserRef = usersRef.push(); // Create a new child under 'users'
@@ -189,7 +191,7 @@ public class sign_up extends AppCompatActivity {
 
         if (connection != null) {
             try {
-                String query = "INSERT INTO users (full_name, email, date_of_birth, password, career_description, avatar) VALUES (?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO users (full_name, email, date_of_birth, password, career_description, avatar, short_intro, experience_education) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, email);
@@ -197,6 +199,8 @@ public class sign_up extends AppCompatActivity {
                 preparedStatement.setString(4, password);
                 preparedStatement.setString(5, career);
                 preparedStatement.setString(6, defaultAvatar);
+                preparedStatement.setString(7, defaultIntro);
+                preparedStatement.setString(8, defaultExperienceEducation);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
