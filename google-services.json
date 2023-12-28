@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "546628520978",
+    "project_id": "equalopportuna2",
+    "storage_bucket": "equalopportuna2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546628520978:android:028bedd9aac4bc8d661ccb",
+        "android_client_info": {
+          "package_name": "com.example.equalopportuna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546628520978-ipe4gkg1hn9g4dgg1lt265kr69maarhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARVNYkQbs2VjwVQNbZvq7Zz3T5ogJ9BoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546628520978-ipe4gkg1hn9g4dgg1lt265kr69maarhe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546628520978:android:ba617097a62200e2661ccb",
+        "android_client_info": {
+          "package_name": "com.example.tutorial45"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546628520978-ipe4gkg1hn9g4dgg1lt265kr69maarhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARVNYkQbs2VjwVQNbZvq7Zz3T5ogJ9BoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546628520978-ipe4gkg1hn9g4dgg1lt265kr69maarhe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
