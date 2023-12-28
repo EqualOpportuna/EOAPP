@@ -61,7 +61,7 @@ public class change_pw extends AppCompatActivity {
             return false;
         }
 
-        if (!isEmailRegistered(email)) {
+        if (isEmailRegistered(email)) {
             showToast("Email is already registered");
             return false;
         }

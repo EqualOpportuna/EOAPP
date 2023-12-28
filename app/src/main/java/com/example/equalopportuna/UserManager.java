@@ -1,8 +1,7 @@
 package com.example.equalopportuna;
-
+// UserManager.java
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 
 public class UserManager {
 
@@ -12,32 +11,11 @@ public class UserManager {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_DATE_OF_BIRTH = "dateOfBirth";
 
-    private static final String KEY_CAREER_DESC = "careerDesc";
-    private static final String KEY_SHORT_INTRO = "shortIntro";
-    private static final String KEY_EXPERIENCE_EDUCATION = "experienceEducation";
-
-    private static final String KEY_AVATAR_FILENAME = "avatarFileName"; // Added for avatar
-
     private static UserManager instance;
     private final SharedPreferences sharedPreferences;
 
     private UserManager(Context context) {
         sharedPreferences = context.getSharedPreferences(USER_PREFS_NAME, Context.MODE_PRIVATE);
-    }
-    public void onclickNewEx(View view){
-
-    }
-
-    public void setShortIntro(String shortIntro) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_SHORT_INTRO, shortIntro);
-        editor.apply();
-    }
-
-    public void setExperienceEducation(String experienceEducation) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_EXPERIENCE_EDUCATION, experienceEducation);
-        editor.apply();
     }
 
     public static synchronized UserManager getInstance(Context context) {
@@ -47,16 +25,12 @@ public class UserManager {
         return instance;
     }
 
-    public void saveUserInfo(int userId, String fullName, String email, String dateOfBirth, String career_desc,String avatarFileName, String shortIntro, String experienceEducation) {
+    public void saveUserInfo(int userId, String fullName, String email, String dateOfBirth) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_USER_ID, userId);
         editor.putString(KEY_FULL_NAME, fullName);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_DATE_OF_BIRTH, dateOfBirth);
-        editor.putString(KEY_CAREER_DESC, career_desc);
-        editor.putString(KEY_AVATAR_FILENAME, avatarFileName);
-        editor.putString(KEY_SHORT_INTRO, shortIntro);
-        editor.putString(KEY_EXPERIENCE_EDUCATION, experienceEducation);
         editor.apply();
     }
 
@@ -74,19 +48,5 @@ public class UserManager {
 
     public String getDateOfBirth() {
         return sharedPreferences.getString(KEY_DATE_OF_BIRTH, "");
-    }
-
-    public String getShortIntro() { return sharedPreferences.getString(KEY_SHORT_INTRO, "");}
-
-    public String getExperienceEducation() { return sharedPreferences.getString(KEY_EXPERIENCE_EDUCATION, "");}
-
-    public String getAvatarFileName() {
-        return sharedPreferences.getString(KEY_AVATAR_FILENAME, null);
-    }
-
-    public void saveAvatarFileName(String avatarFileName) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_AVATAR_FILENAME, avatarFileName);
-        editor.apply();
     }
 }

@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ForumRecycler"
-        android:layout_width="413dp"
-        android:layout_height="510dp"
+        android:layout_width="405dp"
+        android:layout_height="648dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -43,9 +43,6 @@
         android:scaleY="0.5"
         app:layout_constraintStart_toEndOf="@+id/ETMessage"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

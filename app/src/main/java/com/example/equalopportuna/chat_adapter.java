@@ -1,7 +1,6 @@
 package com.example.equalopportuna;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +38,14 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
 
         holder.username.setText(chatItem.getUsername());
         holder.chatPreview.setText(chatItem.getChatPreview());
-        holder.chatDate.setText(chatItem.getCareerDescription());
-        int resId = context.getResources().getIdentifier(chatItem.getAvatarName(), "drawable", context.getPackageName());
-        holder.profilePic.setImageResource(resId);
+        holder.chatDate.setText(chatItem.getChatDate());
+        holder.profilePic.setImageResource(chatItem.getImageUrl());
 
+        // Set click listener for the cardView
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToChatHistFragment(chatItem.getUsername());
+                navigateToChatHistFragment();
             }
         });
     }
@@ -56,23 +55,13 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
         return chatList.size();
     }
 
-    private void navigateToChatHistFragment(String username) {
+    private void navigateToChatHistFragment() {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-
-        ChatHistFragment chatHistFragment = new ChatHistFragment();
-
-        // Create a Bundle and add the username to it
-        Bundle bundle = new Bundle();
-        bundle.putString("key", username);
-        chatHistFragment.setArguments(bundle);
-
-        // Begin the transaction
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_community, chatHistFragment)
+                .replace(R.id.fragment_community, new ChatHistFragment())
                 .addToBackStack(null)
                 .commit();
     }
-
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder {
         ImageView profilePic;
