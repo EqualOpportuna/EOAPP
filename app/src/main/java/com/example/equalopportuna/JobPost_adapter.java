@@ -78,7 +78,7 @@ public class JobPost_adapter extends RecyclerView.Adapter<JobPost_adapter.viewHo
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.job_title);
+            title = itemView.findViewById(R.id.description);
             companyName = itemView.findViewById(R.id.company_name);
             location = itemView.findViewById(R.id.job_location);
             jobLogo = itemView.findViewById(R.id.job_logo);

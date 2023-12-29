@@ -17,17 +17,26 @@
         android:theme="@style/Theme.EqualOpportuna"
         tools:targetApi="34">
         <activity
+            android:name=".coursedetails_testing"
+            android:exported="false" />
+        <activity
+            android:name=".activity_course_details"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".PendingRequestsActivity"
             android:exported="false" />
-        <activity android:name=".sign_up" android:exported="false" />
+        <activity
+            android:name=".sign_up"
+            android:exported="false" />
         <activity android:name=".MainActivity" />
         <activity android:name=".login_page" />
         <activity android:name=".forgot_password" />

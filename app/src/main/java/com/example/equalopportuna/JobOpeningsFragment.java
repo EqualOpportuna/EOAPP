@@ -49,6 +49,7 @@ public class JobOpeningsFragment extends Fragment {
         View.OnClickListener OCLCreatJob = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Navigation.findNavController(view).navigate(R.id.createJobFormFragment);
             }
         };
