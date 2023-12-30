@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.equalopportuna.R;
@@ -53,7 +54,7 @@ public class Friends_adapter extends RecyclerView.Adapter<Friends_adapter.ViewHo
         holder.connection_period.setText(user.getConnectionPeriod());
 
         // Set click listener for the profilePic
-        holder.profilePic.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle the click event here, for example, show a toast
@@ -70,7 +71,7 @@ public class Friends_adapter extends RecyclerView.Adapter<Friends_adapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profilePic;
         TextView username, career_desc, connection_period;
-        Button chatBTN;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,7 +79,7 @@ public class Friends_adapter extends RecyclerView.Adapter<Friends_adapter.ViewHo
             username = itemView.findViewById(R.id.username);
             career_desc = itemView.findViewById(R.id.career_desc);
             connection_period = itemView.findViewById(R.id.connection_period);
-            chatBTN = itemView.findViewById(R.id.chatBTN);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
     private void showProfileInfoDialog(Friends user) {

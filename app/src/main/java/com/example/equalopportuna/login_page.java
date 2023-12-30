@@ -31,7 +31,7 @@ public class login_page extends AppCompatActivity {
 
 
     private UserManager userManager;
-    private Job jobs;
+    private Job jobs = new Job();
     private StoryManager storyManager; // Add StoryManager instance
 
     @Override
@@ -131,14 +131,19 @@ public class login_page extends AppCompatActivity {
                     List<Friends> allFriends = Friends.getAllFriendsFromDatabase(connection, loggedInFullName);
                     Friends.setAllFriends(allFriends);
                     chat.getAllChatList();
+                    System.out.println("NUMBER OF FRIENDS: " + allFriends.size());
+
+                    for(int i = 0; i < allFriends.size(); i++){
+                        System.out.println("FRIENDS: " + allFriends.get(i).getUsername());
+                    }
 
 
                         List<Users> allUsers = Users.getAllUsersFromDatabase(connection, loggedInFullName);
                         for(int i = 0; i < allUsers.size(); i++){
                             for(int j = 0; j  < allFriends.size(); j++){
                                 if(allUsers.get(i).getUsername().equals(allFriends.get(j).getUsername())){
+                                    System.out.println("FRIEND THAT IS REMOVED: " + allUsers.get(i).getUsername());
                                     allUsers.remove(i);
-                                    break;
                                 }
                             }
                         }

@@ -114,8 +114,31 @@
             }
         }
 
+        public String getEmailFromName(String username) {
+            String email = null;
 
+            try {
+                if (con == null || con.isClosed()) {
+                    con = SQLConnection();
+                }
 
+                if (con != null) {
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT email FROM users WHERE full_name = '" + username + "'");
+
+                    if (rs.next()) {
+                        email = rs.getString("email");
+                    }
+
+                    rs.close();
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                Log.e("Error", "Error getting email from name: " + e.getMessage());
+            }
+
+            return email;
+        }
 
 
     }
