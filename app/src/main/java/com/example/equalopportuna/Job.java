@@ -15,19 +15,22 @@ public class Job {
     private String companyName;
     private String jobLocation;
     private String tier;
+    private String name;
 
     private static List<Job> jobList = new ArrayList<>();
 
 
-    public Job(int jobID, String jobTitle, String companyName, String jobLocation, String tier) {
+    public Job(int jobID, String jobTitle, String companyName, String jobLocation, String tier, String name) {
         this.jobID = jobID;
         this.jobTitle = jobTitle;
         this.companyName = companyName;
         this.jobLocation = jobLocation;
         this.tier = tier;
+        this.name = name;
     }
+    public Job(){}
 
-    public static void fetchAndStoreJobData(Connection connection) {
+    public void fetchAndStoreJobData(Connection connection) {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM jobs");
@@ -40,8 +43,9 @@ public class Job {
                 String companyName = rs.getString("companyName");
                 String jobLocation = rs.getString("jobLocation");
                 String tier = rs.getString("tier");
+                String name = rs.getString("job_poster");
 
-                Job job = new Job(jobID, jobTitle, companyName, jobLocation, tier);
+                Job job = new Job(jobID, jobTitle, companyName, jobLocation, tier, name);
                 jobList.add(job);
             }
 
@@ -56,12 +60,6 @@ public class Job {
     public static List<Job> getJobList() {
         return jobList;
     }
-
-    // ... (existing code)
-
-
-
-
 
 
     public int getJobID() {
@@ -83,6 +81,6 @@ public class Job {
     public String getTier() {
         return tier;
     }
-
+    public String getName() { return name; }
 
 }
