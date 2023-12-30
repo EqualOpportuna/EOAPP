@@ -8,18 +8,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
+
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -29,15 +22,15 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
     Context context;
     List<Model> ModelIs;
 
+    String username;
 
-    public AA_recyclerViewAdapter(Context context, List<Model> ModelIS){
+
+    public AA_recyclerViewAdapter(Context context, List<Model> ModelIS, String currentUser){
         this.context = context;
         this.ModelIs = ModelIS;
+        this.username = currentUser;
 
     }
-
-
-
 
     @NonNull
     @Override
@@ -48,9 +41,6 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
     }
 
 
-    // 设置点击事件的方法
-
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
@@ -58,13 +48,20 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
         holder.tvName.setText(ModelIs.get(position).getCourseName());
         holder.tvFeedback.setText(ModelIs.get(position).getCourseFeedback());
         holder.tvDate.setText(ModelIs.get(position).getCourseDate());
-        holder.imageView.setImageResource(ModelIs.get(position).getImage());
+        String name = ModelIs.get(position).getCourseName();
+        String link = ModelIs.get(position).getLink();
+        String description = ModelIs.get(position).getDescription();
+        String recommendedCourses = ModelIs.get(position).getRecommendedCourse();
+
+
         //position is the corresponding ID in db
         holder.itemView.setOnClickListener((view) -> {
-            System.out.println("yes,clicked");
-            Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context, activity_course_details.class);
-            intent.putExtra("id",position); // Replace "YOUR_KEY" with your key
+            intent.putExtra("name", name);
+            intent.putExtra("link", link);
+            intent.putExtra("description", description);
+            intent.putExtra("recommended", recommendedCourses);
+            intent.putExtra("username", username);
             context.startActivity(intent);
         });
 
@@ -79,13 +76,11 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imageView;
         TextView tvName, tvDate, tvFeedback;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView4);
             tvName = itemView.findViewById(R.id.TVcourseName);
             tvDate = itemView.findViewById(R.id.TVcourseDate);
             tvFeedback = itemView.findViewById(R.id.TVcourseFeedback);

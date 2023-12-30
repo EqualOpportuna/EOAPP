@@ -56,7 +56,6 @@ public class MainPageFragment extends Fragment {
 
     private void loadAvatar() {
         // Get user information from UserViewModel
-        int userId = userManager.getUserId();
         String avatarFileName = userManager.getAvatarFileName(); // Modify this based on your actual implementation
 
         if (avatarFileName != null) {
@@ -137,7 +136,7 @@ public class MainPageFragment extends Fragment {
         builder.setTitle("Choose Avatar");
 
         // Array to hold the avatar filenames or paths
-        final String[] avatars = {"profile_image1", "profile_image2", "profile_image3"};
+        final String[] avatars = {"profile_image1", "profile_image2", "profile_image3", "profile_image4", "profile_image5", "profile_image6", "profile_image7", "profile_image8", "profile_image9", "profile_image10"};
 
         builder.setItems(avatars, new DialogInterface.OnClickListener() {
             @Override
