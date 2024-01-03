@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -83,13 +84,13 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
                 // Insert a new story into the database
                 Database database = new Database();
                 Connection connection = database.SQLConnection();
-                insertStory();
+                if(insertStory()){
                 storyManager.fetchAndStoreStoryData(requireContext(), connection);
 
 
                 // Notify the adapter that the data has changed
                 adapter.notifyDataSetChanged();
-            }
+            }}
         });
 
 
@@ -99,10 +100,20 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
         return view;
     }
 
-    public void insertStory() {
+    public boolean insertStory() {
         // Get the message from the EditText
         EditText etMessage = requireView().findViewById(R.id.ETMessage);
         String message = etMessage.getText().toString().trim();
+
+        // Check if the message length is more than 250 characters
+        if (message.length() > 250) {
+            // Show a toast or dialog indicating that the message is too long
+            Toast.makeText(requireContext(), "Message is too long (max 250 characters)", Toast.LENGTH_SHORT).show();
+            return false; // Do not continue if the message is too long
+        }
+
+        // Replace invalid characters in the message with spaces
+        message = message.replaceAll("[.#$\\[\\]]", " ");
 
         // Insert the story into the database
         if (!message.isEmpty()) {
@@ -112,15 +123,22 @@ public class StoriesForumFragment extends Fragment implements ForumPostAdapter.O
 
             // Clear the EditText after sending the story
             etMessage.getText().clear();
-            storiesRef.child(username).child(message).child("likes").setValue(0);
+            DatabaseReference userStoriesRef = storiesRef.child(username).push();
+
+            userStoriesRef.child("message").setValue(message);
+            userStoriesRef.child("likes").setValue(0);
 
             // You may also want to update your RecyclerView with the new data
             // Assuming StoryManager.getStoryList() gets the updated list of stories
             List<ForumPostNew> updatedForumPosts = StoryManager.getStoryList();
             adapter.setForumPosts(updatedForumPosts, username);
             adapter.notifyDataSetChanged();
+            return true;
         }
+        return false;
     }
+
+
 
 
 }
