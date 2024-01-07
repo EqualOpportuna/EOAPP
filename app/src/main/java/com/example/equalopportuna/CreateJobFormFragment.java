@@ -87,7 +87,6 @@ public class CreateJobFormFragment extends Fragment {
         jobPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Call a method to insert the job into the database
                 insertJobToDatabase();
                 updateNotificationStatusForAllUsers();
             }
@@ -103,13 +102,11 @@ public class CreateJobFormFragment extends Fragment {
     }
 
     private void insertJobToDatabase() {
-        // Get the values from EditText fields
         String jobTitle = etJobTitle.getText().toString().trim();
         String company = etCompany.getText().toString().trim();
         String location = etLocation.getText().toString().trim();
         String selectedTier = tierSpinner.getSelectedItem().toString(); // Get the selected tier from the Spinner
 
-        // Check if all fields are filled
         if (jobTitle.isEmpty() || company.isEmpty() || location.isEmpty()) {
             Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -133,7 +130,6 @@ public class CreateJobFormFragment extends Fragment {
                 int rowsAffected = preparedStatement.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    // Successfully added to the database, now fetch the job ID
                     ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
                     int jobId = -1;
                     if (generatedKeys.next()) {

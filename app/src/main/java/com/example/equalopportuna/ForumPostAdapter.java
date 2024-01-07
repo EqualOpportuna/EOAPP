@@ -126,10 +126,8 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                        // Retrieve the likes count from the specific post
                         long likesCount = postSnapshot.child("likes").getValue(Long.class);
 
-                        // Update the likes count in the TextView directly
                         holder.numberOfLikes.setText(String.valueOf(likesCount));
                     }
                 }
@@ -179,11 +177,9 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     private void downloadStory(int position, Context context) {
         ForumPostNew currentPost = forumPosts.get(position);
 
-        // Get the data to be included in the PDF
         String publisher = currentPost.getUsername();
         String story = currentPost.getMessage();
 
-        // Create a PDF document
         createPdfDocument(context, publisher, story);
     }
 
@@ -200,13 +196,11 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         paint.setColor(Color.BLACK);
         paint.setTextSize(12);
 
-        // Add publisher name to the PDF
         canvas.drawText("Publisher: " + publisher, 50, 30, paint);
 
-        // Add content to the PDF with line wrapping
         int startX = 50;
         int startY = 50;
-        int lineHeight = 25; // Set the desired line height
+        int lineHeight = 25;
         int maxCharactersPerLine = 36;
         int currentIndex = 0;
 
@@ -218,24 +212,18 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             startY += lineHeight;
         }
 
-        // Finish the page
         pdfDocument.finishPage(page);
 
-        // Generate a unique filename based on the current timestamp
         String timestamp = String.valueOf(System.currentTimeMillis());
         String fileName = "story_" + timestamp + ".pdf";
 
-        // Define the file path where the PDF will be saved in the "Downloads" folder
         String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + fileName;
 
         try {
-            // Save the document to the specified file path
             FileOutputStream fos = new FileOutputStream(filePath);
             pdfDocument.writeTo(fos);
             pdfDocument.close();
             fos.close();
-
-            // Display a Toast to notify the user that the story has been downloaded
             Toast.makeText(context, "Story Downloaded: " + filePath, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();

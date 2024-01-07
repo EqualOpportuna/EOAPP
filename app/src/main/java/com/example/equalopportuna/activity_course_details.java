@@ -26,8 +26,7 @@
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_course_details);
-    
-            // Retrieve data from intent extras
+
             Intent intent = getIntent();
             if (intent != null) {
                 name = intent.getStringExtra("name");
@@ -36,7 +35,6 @@
                 recommended = intent.getStringExtra("recommended");
                 username = intent.getStringExtra("username");
     
-                // Set values to TextViews
                 TextView tvHeading = findViewById(R.id.heading);
                 TextView tvDescription = findViewById(R.id.description);
                 TextView tvTypeValue = findViewById(R.id.type_value);
@@ -47,20 +45,17 @@
                 tvRecommend.setText(recommended);
                 tvTypeValue.setText("Video");
     
-                // Watch Youtube button click listener
                 Button watchBtn = findViewById(R.id.watchBtn);
                 watchBtn.setOnClickListener(view -> {
                     if (link != null && !link.isEmpty()) {
-                        // Open the Youtube link
                         Intent youtubeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                         startActivity(youtubeIntent);
                     }
                 });
             }
     
-            // SeekBar for progress tracking
             SeekBar progressSlider = findViewById(R.id.progressSlider);
-            int savedProgress = getSavedProgress(); // Retrieve saved progress
+            int savedProgress = getSavedProgress();
             progressSlider.setProgress(savedProgress);
             progressSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
@@ -68,7 +63,7 @@
                     // Update the progress as the user slides the SeekBar
                     // You may want to display the progress in a TextView or handle it as needed
                 }
-    
+
                 @Override
                 public void onStartTrackingTouch(SeekBar seekBar) {
                     // Handle the start of tracking (if needed)

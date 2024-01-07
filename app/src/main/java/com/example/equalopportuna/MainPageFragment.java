@@ -100,7 +100,6 @@ public class MainPageFragment extends Fragment {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open a custom picker dialog to let the user choose one of the predefined avatars
                 showAvatarPickerDialog();
             }
         });
@@ -108,7 +107,7 @@ public class MainPageFragment extends Fragment {
         // Get user information from UserViewModel
         int userId = userManager.getUserId();
         String fullName = userManager.getFullName();
-        welcomeTextView.setText("Welcome, " + fullName + "!");
+        welcomeTextView.setText("Hey " + fullName + "!");
         shortIntro.setText(userManager.getShortIntro());
         edu_ex.setText(userManager.getExperienceEducation());
 
@@ -135,21 +134,18 @@ public class MainPageFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Choose Avatar");
 
-        // Array to hold the avatar filenames or paths
         final String[] avatars = {"profile_image1", "profile_image2", "profile_image3", "profile_image4", "profile_image5", "profile_image6", "profile_image7", "profile_image8", "profile_image9", "profile_image10"};
 
         builder.setItems(avatars, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Handle the avatar selection
+
                 String selectedAvatar = avatars[which];
 
-                // Save the selected avatar information to the database
                 saveAvatarToDatabase(selectedAvatar);
                 userManager.saveAvatarFileName(selectedAvatar);
 
-                // Update the profile image view
-                loadAvatar(); // Reload the avatar after selecting a new one
+                loadAvatar();
             }
         });
 

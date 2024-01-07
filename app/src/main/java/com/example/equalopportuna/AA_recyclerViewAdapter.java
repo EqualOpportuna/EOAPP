@@ -43,8 +43,6 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-
         holder.tvName.setText(ModelIs.get(position).getCourseName());
         holder.tvFeedback.setText(ModelIs.get(position).getCourseFeedback());
         holder.tvDate.setText(ModelIs.get(position).getCourseDate());
@@ -53,8 +51,6 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
         String description = ModelIs.get(position).getDescription();
         String recommendedCourses = ModelIs.get(position).getRecommendedCourse();
 
-
-        //position is the corresponding ID in db
         holder.itemView.setOnClickListener((view) -> {
             Intent intent = new Intent(context, activity_course_details.class);
             intent.putExtra("name", name);
@@ -64,9 +60,6 @@ public class AA_recyclerViewAdapter extends RecyclerView.Adapter<AA_recyclerView
             intent.putExtra("username", username);
             context.startActivity(intent);
         });
-
-
-
     }
 
     @Override
