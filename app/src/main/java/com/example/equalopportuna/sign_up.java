@@ -105,31 +105,25 @@ public class sign_up extends AppCompatActivity {
     }
 
     private boolean isValidPassword(String password) {
-        // Password must be at least 5 characters, contain at least one number, and one special symbol
         return password.length() >= 5 && password.matches(".*\\d.*") && password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
     }
 
     private boolean isValidDateFormat(String date) {
-        // Simple regex to check if the date is in the format yyyy/mm/dd
         return date.matches("\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])");
     }
 
     private boolean isValidDateRange(String date) {
-        // Extract year, month, and day from the date string
         String[] dateParts = date.split("/");
         int year = Integer.parseInt(dateParts[0]);
         int month = Integer.parseInt(dateParts[1]);
         int day = Integer.parseInt(dateParts[2]);
 
-        // Check if month is in the valid range (1 to 12) and day is in the valid range for the given month
         return month >= 1 && month <= 12 && day >= 1 && day <= getDaysInMonth(year, month);
     }
 
     private int getDaysInMonth(int year, int month) {
-        // Simple logic to get the number of days in a month
         switch (month) {
             case 2:
-                // Check for leap year
                 return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) ? 29 : 28;
             case 4:
             case 6:

@@ -56,9 +56,7 @@ public class login_page extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the login logic here
                 if (validateInputs()) {
-                    // Inputs are valid, proceed with login
                     login();
                 }
             }
@@ -117,39 +115,26 @@ public class login_page extends AppCompatActivity {
                     String intro = resultSet.getString("short_intro");
                     String experience_education = resultSet.getString("experience_education");
 
-                    // Set user information in UserViewModel
                     userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth, career_desc,avatar, intro, experience_education);
                     jobs.fetchAndStoreJobData(connection);
 
-                    // Fetch and store stories using StoryManager
                     storyManager.fetchAndStoreStoryData(this, connection);
-
-
 
                     String loggedInFullName = userManager.getFullName();
 
                     List<Friends> allFriends = Friends.getAllFriendsFromDatabase(connection, loggedInFullName);
                     Friends.setAllFriends(allFriends);
                     chat.getAllChatList();
-                    System.out.println("NUMBER OF FRIENDS: " + allFriends.size());
-
-                    for(int i = 0; i < allFriends.size(); i++){
-                        System.out.println("FRIENDS: " + allFriends.get(i).getUsername());
-                    }
-
 
                         List<Users> allUsers = Users.getAllUsersFromDatabase(connection, loggedInFullName);
                         for(int i = 0; i < allUsers.size(); i++){
                             for(int j = 0; j  < allFriends.size(); j++){
                                 if(allUsers.get(i).getUsername().equals(allFriends.get(j).getUsername())){
-                                    System.out.println("FRIEND THAT IS REMOVED: " + allUsers.get(i).getUsername());
                                     allUsers.remove(i);
                                 }
                             }
                         }
                         Users.setAllUsers(allUsers);
-
-
                     showToast("Logged in successfully");
                     navigateToMainPage();
                 } else {
@@ -171,6 +156,7 @@ public class login_page extends AppCompatActivity {
         // Start the MainPageActivity
         Intent intent = new Intent(login_page.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void navigateToForgotPassword() {

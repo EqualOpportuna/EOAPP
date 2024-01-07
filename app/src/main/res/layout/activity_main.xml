@@ -24,6 +24,29 @@
             android:paddingLeft="20sp"
             app:itemIconTint="#92686C"
             app:menu="@menu/search_menu">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/eq_icon"
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:padding="8dp"/>
+
+            <!-- Add your app name here -->
+            <TextView
+                android:id="@+id/appNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EqualOpportuna"
+                android:textStyle="bold"
+                android:textSize="23sp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/logoImageView"
+                android:layout_marginStart="8dp"/>
     </androidx.appcompat.widget.Toolbar>
 
 

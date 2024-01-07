@@ -45,13 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private final Runnable checkPendingStatusRunnable = new Runnable() {
         @Override
         public void run() {
-
             checkJobNotification();
-
             checkConnectedFriends();
-            // Check for pending status in Firebase
             checkPendingStatus();
-            // Repeat the task every 10 seconds (adjust the delay as needed)
             handler.postDelayed(this, 1000);
         }
     };
@@ -87,23 +83,15 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 if (item.getItemId() == R.id.bell) {
-                    // Handle bell action
                     if (item.getIcon().getConstantState().equals(getResources().getDrawable(R.drawable.bellinactive).getConstantState())) {
-                        // Check if the bell is in the disactive state
                         showToast("No notifications");
                         return true;
                     } else {
-                        // Handle other bell actions here
-                        System.out.println(jobNotifications.isEmpty());
                         if (!jobNotifications.isEmpty()) {
-                            System.out.println("WE ARE HERE");
-                            for (int i = 0; i < jobNotifications.size(); i++) {
-                                System.out.println(jobNotifications.get(i));
-                            }
+
                             showJobNotificationsPopup(item.getActionView() != null ? item.getActionView() : findViewById(R.id.bell)); // Provide a fallback view if item.getActionView() is null
 
                         } else {
-                            System.out.println("WE ARE HERE INTENT PLACE");
                             Intent intent = new Intent(MainActivity.this, PendingRequestsActivity.class);
                             intent.putExtra("currentUsername", currentUsername);
                             MainActivity.this.startActivity(intent);
@@ -246,12 +234,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    System.out.println("right here");
 
                     DataSnapshot newJobPostedSnapshot = snapshot.child("new_job_posted");
 
                     if (newJobPostedSnapshot.exists()) {
-                        // Iterate through the new_job_posted nodes and add their values to the list
                         for (DataSnapshot jobSnapshot : newJobPostedSnapshot.getChildren()) {
                             String jobNotification = jobSnapshot.getValue(String.class);
                             System.out.println("JOB TITLE: " + jobNotification);
@@ -260,8 +246,6 @@ public class MainActivity extends AppCompatActivity {
                                 bellMenuItem.setIcon(R.drawable.bellactive);
                             }
                         }
-
-                        // Update the bell icon to bellactive
 
                     }
                 }

@@ -57,7 +57,6 @@ public class Friends_adapter extends RecyclerView.Adapter<Friends_adapter.ViewHo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the click event here, for example, show a toast
                 showProfileInfoDialog(user);
             }
         });
@@ -100,12 +99,10 @@ public class Friends_adapter extends RecyclerView.Adapter<Friends_adapter.ViewHo
         username.setText(user.getUsername());
         careerDesc.setText(user.getCareerDescription());
 
-        // Fetch additional information from the Users table
         List<String> userProfile = getUserProfile(user.getUsername());
         if (userProfile.size() == 2) {
             shortInfo.setText(userProfile.get(0));
             experienceEducation.setText(userProfile.get(1));
-            // Add other setText calls for additional fields
         }
 
         // Show the dialog
