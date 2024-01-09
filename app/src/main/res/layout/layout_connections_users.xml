@@ -6,10 +6,12 @@
     android:id="@+id/cardView"
     android:layout_width="175dp"
     android:layout_height="wrap_content"
-    android:layout_margin="16sp"
+    android:layout_margin="8sp"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/storybg"
+
         android:layout_width="175dp"
         android:layout_height="250dp"
         android:padding="8dp">

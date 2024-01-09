@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import java.util.List;
 public class ChatHistFragment extends Fragment {
 
     private TextView userNameTextView;
+    private ImageView imageView;
     private ListView chatListView;
     private EditText messageEditText;
     private Button sendButton;
@@ -43,23 +45,39 @@ public class ChatHistFragment extends Fragment {
         usersRef = db.getReference("chats");
 
         userNameTextView = view.findViewById(R.id.userNameTextView);
+        imageView = view.findViewById(R.id.image);
         chatListView = view.findViewById(R.id.chatListView);
         messageEditText = view.findViewById(R.id.messageEditText);
         sendButton = view.findViewById(R.id.sendButton);
 
         userManager = UserManager.getInstance(requireContext());
+        String currentUserName = userManager.getFullName();
 
-        chatAdapter = new ChatAdapter(requireContext(), new ArrayList<>());
+        chatAdapter = new ChatAdapter(requireContext(), new ArrayList<>(), currentUserName);
         chatListView.setAdapter(chatAdapter);
 
 
 
-        String currentUserName = userManager.getFullName();
-        String otherUserName = ""; // Replace with the actual current user's username
+        String otherUserName = "";
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey("key")) {
-            otherUserName = bundle.getString("key");
+        if (bundle != null && bundle.containsKey("key_username") && bundle.containsKey("key_avatar")) {
+            otherUserName = bundle.getString("key_username");
             userNameTextView.setText(otherUserName);
+
+            // Get the avatar name from the bundle
+            String avatarName = bundle.getString("key_avatar");
+
+            // Check if avatarName is not null before setting the image resource
+            if (avatarName != null) {
+                // Set the image resource dynamically based on the avatar name
+                int resId = getResources().getIdentifier(avatarName, "drawable", requireContext().getPackageName());
+                imageView.setImageResource(resId);
+            } else {
+                // Handle the case where avatarName is null (optional)
+                // For example, you can set a default image or log an error message.
+                // imageView.setImageResource(R.drawable.default_avatar);
+                // Log.e("ChatHistFragment", "AvatarName is null");
+            }
         }
         loadChatMessages(currentUserName, otherUserName);
         String finalOtherUserName = otherUserName;
@@ -86,8 +104,7 @@ public class ChatHistFragment extends Fragment {
     }
 
     private void loadChatMessages(String currentUserName, String otherUserName) {
-        // Use Firebase Realtime Database queries to retrieve chat messages based on currentUserName and the other user's name
-        // Dynamically create chatId based on both users' usernames
+
         String chatId = getChatId(currentUserName, otherUserName);
 
         DatabaseReference chatRef = db.getReference("chats").child(chatId); // Use the specific chatId reference

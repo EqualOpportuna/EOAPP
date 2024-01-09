@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class MainPageFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final int PICK_IMAGE_REQUEST = 1;
+    private ImageView zodiacImageView;
 
     private String mParam1;
     private String mParam2;
@@ -52,6 +55,7 @@ public class MainPageFragment extends Fragment {
 
         // Load the avatar when the fragment is resumed
         loadAvatar();
+       loadZodiac();
     }
 
     private void loadAvatar() {
@@ -62,6 +66,19 @@ public class MainPageFragment extends Fragment {
             // Update the profile image view
             int resId = getResources().getIdentifier(avatarFileName, "drawable", requireActivity().getPackageName());
             profileImageView.setImageResource(resId);
+        }
+    }
+
+    private void loadZodiac() {
+        // Get user information from UserViewModel
+        String zodiacFileName = userManager.getZodiacFilename(); // Modify this based on your actual implementation
+
+        if (zodiacFileName != null) {
+
+                int resId = getResources().getIdentifier(zodiacFileName, "drawable", requireActivity().getPackageName());
+                zodiacImageView.setImageResource(resId);
+
+
         }
     }
 
@@ -127,6 +144,15 @@ public class MainPageFragment extends Fragment {
             }
         });
 
+        zodiacImageView = view.findViewById(R.id.zodiac);  // Add this line
+
+        zodiacImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showZodiacPickerDialog();
+            }
+        });
+
         return view;
     }
 
@@ -153,17 +179,14 @@ public class MainPageFragment extends Fragment {
     }
 
     private void saveAvatarToDatabase(String selectedAvatar) {
-        // Assuming you have a Database instance, replace "yourPackageName" with your actual package name
         Database database = new Database();
 
         try {
             Connection connection = database.SQLConnection();
 
             if (connection != null) {
-                // Get user ID from UserManager (modify this based on your actual implementation)
                 int userId = userManager.getUserId();
 
-                // Update the avatar information in the database
                 String updateQuery = "UPDATE users SET avatar = ? WHERE id = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
                     preparedStatement.setString(1, selectedAvatar);
@@ -251,4 +274,52 @@ public class MainPageFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    private void showZodiacPickerDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Choose Zodiac Sign");
+
+        final String[] zodiacSigns = {"aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"};
+
+        builder.setItems(zodiacSigns, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String selectedZodiacSign = zodiacSigns[which];
+
+                // Set the selected zodiac image to the zodiacImageView
+                int resId = getResources().getIdentifier("zodiac_" + selectedZodiacSign, "drawable", requireActivity().getPackageName());
+                zodiacImageView.setImageResource(resId);
+
+                saveZodiacToDatabase("zodiac_" + selectedZodiacSign);
+                userManager.saveZodiacFileName("zodiac_" + selectedZodiacSign);
+                loadZodiac();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void saveZodiacToDatabase(String selectedZodiac) {
+        Database database = new Database();
+
+        try {
+            Connection connection = database.SQLConnection();
+
+            if (connection != null) {
+                int userId = userManager.getUserId();
+
+                String updateQuery = "UPDATE users SET zodiac = ? WHERE id = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                    preparedStatement.setString(1, selectedZodiac);
+                    preparedStatement.setInt(2, userId);
+                    preparedStatement.executeUpdate();
+                }
+
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

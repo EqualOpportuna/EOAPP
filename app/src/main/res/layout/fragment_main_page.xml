@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFEFE"
+    android:background="@drawable/homebg"
     tools:context=".MainActivity">
 
     <TextView
@@ -127,6 +127,16 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/zodiac"
+        android:layout_width="149dp"
+        android:layout_height="226dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
+        android:src="@drawable/zodiac_scorpio" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

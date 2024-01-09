@@ -16,7 +16,9 @@ public class UserManager {
     private static final String KEY_SHORT_INTRO = "shortIntro";
     private static final String KEY_EXPERIENCE_EDUCATION = "experienceEducation";
 
-    private static final String KEY_AVATAR_FILENAME = "avatarFileName"; // Added for avatar
+    private static final String KEY_AVATAR_FILENAME = "avatarFileName";
+    private static final String KEY_ZODIAC_FILENAME = "zodiacFileName";
+
 
     private static UserManager instance;
     private final SharedPreferences sharedPreferences;
@@ -47,7 +49,7 @@ public class UserManager {
         return instance;
     }
 
-    public void saveUserInfo(int userId, String fullName, String email, String dateOfBirth, String career_desc,String avatarFileName, String shortIntro, String experienceEducation) {
+    public void saveUserInfo(int userId, String fullName, String email, String dateOfBirth, String career_desc,String avatarFileName, String shortIntro, String experienceEducation, String zodiac) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_USER_ID, userId);
         editor.putString(KEY_FULL_NAME, fullName);
@@ -57,6 +59,7 @@ public class UserManager {
         editor.putString(KEY_AVATAR_FILENAME, avatarFileName);
         editor.putString(KEY_SHORT_INTRO, shortIntro);
         editor.putString(KEY_EXPERIENCE_EDUCATION, experienceEducation);
+        editor.putString(KEY_ZODIAC_FILENAME, zodiac);
         editor.apply();
     }
 
@@ -83,10 +86,16 @@ public class UserManager {
     public String getAvatarFileName() {
         return sharedPreferences.getString(KEY_AVATAR_FILENAME, null);
     }
+    public String getZodiacFilename(){ return sharedPreferences.getString(KEY_ZODIAC_FILENAME, null);}
 
     public void saveAvatarFileName(String avatarFileName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_AVATAR_FILENAME, avatarFileName);
+        editor.apply();
+    }
+    public void saveZodiacFileName(String zodiacFileName) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_ZODIAC_FILENAME, zodiacFileName);
         editor.apply();
     }
 }

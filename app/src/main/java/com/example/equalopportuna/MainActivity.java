@@ -228,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkJobNotification() {
         jobNotifications = new ArrayList<>();
-        System.out.println(currentUsername);
 
         usersRef.child(currentUsername).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
