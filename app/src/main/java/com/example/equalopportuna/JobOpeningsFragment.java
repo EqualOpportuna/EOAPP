@@ -18,6 +18,8 @@ public class JobOpeningsFragment extends Fragment {
 
     RecyclerView recycleJobPosts;
 
+    private UserManager userManager;
+
     public JobOpeningsFragment() {
         // Required empty public constructor
     }
@@ -31,12 +33,14 @@ public class JobOpeningsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_job_openings, container, false);
 
         recycleJobPosts = view.findViewById(R.id.RecycleJobPosts);
+        userManager = UserManager.getInstance(requireContext());
+
 
         // Fetch job data from the static list
         List<Job> jobList = Job.getJobList();
 
         // Set up RecyclerView adapter
-        JobPost_adapter adp = new JobPost_adapter(requireContext(), jobList);
+        JobPost_adapter adp = new JobPost_adapter(requireContext(), jobList, userManager.getFullName());
         recycleJobPosts.setAdapter(adp);
         recycleJobPosts.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -49,6 +53,7 @@ public class JobOpeningsFragment extends Fragment {
         View.OnClickListener OCLCreatJob = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Navigation.findNavController(view).navigate(R.id.createJobFormFragment);
             }
         };

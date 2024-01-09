@@ -40,9 +40,7 @@ public class forgot_password extends AppCompatActivity {
         btnproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*sendMail();
-                findViewById(R.id.box1).setVisibility(View.INVISIBLE);
-                findViewById(R.id.box2).setVisibility(View.VISIBLE);*/
+
                 if(validateinputs()){
                     sendMail();
                     findViewById(R.id.box1).setVisibility(View.GONE);
@@ -130,8 +128,6 @@ public class forgot_password extends AppCompatActivity {
         Random random = new Random();
         code = random.nextInt(899999)+100000;
         code_string = String.valueOf(code);
-
-        //Send Mail
         JavaMailAPI javaMailAPI = new JavaMailAPI(this,mail,subject,code_string);
 
         javaMailAPI.execute();

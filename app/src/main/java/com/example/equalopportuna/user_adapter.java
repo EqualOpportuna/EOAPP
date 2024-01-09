@@ -109,13 +109,11 @@ public class user_adapter extends RecyclerView.Adapter<user_adapter.ViewHolder> 
                 int otherID = Integer.valueOf(database.getUserIdByUsername(user.getUsername()));
 
                 if (buttonText.equals("Connect")) {
-                    // Update Firebase with the status "Pending"
                     userRef.child("status").setValue("Pending");
                     holder.BTNconnect.setText("Pending");
                     insertFriendship(currentID, otherID, "Pending");
                     holder.BTNconnect.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
                 } else if (buttonText.equals("Pending")) {
-                    // Remove the entry from Firebase
                     userRef.removeValue();
                     holder.BTNconnect.setText("Connect");
                     removeFriendship(currentID, otherID);

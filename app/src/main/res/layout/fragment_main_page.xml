@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
-        android:text="About"
+        android:text="About Me"
         android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,26 +68,18 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/about_experience"
+                android:id="@+id/SelfIntro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Experience"
+                android:text="Self Introduction"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp" />
 
-            <TextView
-                android:id="@+id/career_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Software Engineer"
-                android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp" />
 
             <TextView
-                android:id="@+id/career_desc"
+                android:id="@+id/shortIntro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="I pretend to write code but actually, I don't really know what I'm doing"
@@ -115,23 +107,14 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/about_education"
+                android:id="@+id/experience_education"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Education"
+                android:text="Education and Expericene"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/edu_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="University Malaya"
-                android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp" />
 
             <TextView
                 android:id="@+id/edu_desc"

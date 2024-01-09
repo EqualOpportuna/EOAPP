@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activity_course_details" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".newJob_form">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".newJob_form"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="-16dp">
+
+
+            <!-- Modify the Button constraints to make space for the Spinner -->
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="366dp"
+                android:layout_height="89dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="120dp"
+                android:text="EmpowerHer: Mastering Job Search Strategies for Women"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <SeekBar
+                android:id="@+id/progressSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type_value" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="361dp"
+                android:layout_height="112dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="100dp"
+                android:lineSpacingExtra="6sp"
+                android:singleLine="false"
+                android:text="In today's dynamic job market, this course is tailored to equip women with the essential skills and strategies necessary to excel in their job search."
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+            <TextView
+                android:id="@+id/recommendation"
+                android:layout_width="361dp"
+                android:layout_height="112dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="240dp"
+                android:lineSpacingExtra="6sp"
+                android:singleLine="false"
+                android:text="Reccommended course:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+            <TextView
+                android:id="@+id/typeOfContent"
+                android:layout_width="97dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="8sp"
+                android:singleLine="false"
+                android:text="Type:"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+            <TextView
+                android:id="@+id/type_value"
+                android:layout_width="97dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="268dp"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="8sp"
+                android:singleLine="false"
+                android:text="Video"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+            <Button
+                android:id="@+id/watchBtn"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="#92686C"
+                android:text="Watch Youtube"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/header3"
+            android:layout_width="412dp"
+            android:layout_height="60dp"
+            android:background="#ECCDD0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="57dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/header"
+            app:layout_constraintTop_toTopOf="@+id/header"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

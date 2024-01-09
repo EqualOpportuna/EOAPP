@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileOutputStream;
@@ -118,20 +119,27 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     }
 
     private void fetchLikesCount(ForumPostViewHolder holder, ForumPostNew post) {
-        DatabaseReference likesRef = storiesRef
-                .child(post.getUsername())
-                .child(post.getMessage())
-                .child("likes");
+        DatabaseReference userStoriesRef = storiesRef.child(post.getUsername());
 
-        likesRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult().getValue() != null) {
-                long likesCount = (long) task.getResult().getValue();
+        userStoriesRef.orderByChild("message").equalTo(post.getMessage()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        long likesCount = postSnapshot.child("likes").getValue(Long.class);
 
-                // Update the likes count in the TextView directly
-                holder.numberOfLikes.setText(String.valueOf(likesCount));
+                        holder.numberOfLikes.setText(String.valueOf(likesCount));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error if needed
             }
         });
     }
+
 
 
     @Override
@@ -169,11 +177,9 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
     private void downloadStory(int position, Context context) {
         ForumPostNew currentPost = forumPosts.get(position);
 
-        // Get the data to be included in the PDF
         String publisher = currentPost.getUsername();
         String story = currentPost.getMessage();
 
-        // Create a PDF document
         createPdfDocument(context, publisher, story);
     }
 
@@ -190,33 +196,41 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
         paint.setColor(Color.BLACK);
         paint.setTextSize(12);
 
-        // Add content to the PDF
-        canvas.drawText("Publisher: " + publisher, 50, 50, paint);
-        canvas.drawText("Story: " + story, 50, 70, paint);
+        canvas.drawText("Publisher: " + publisher, 50, 30, paint);
 
-        // Finish the page
+        int startX = 50;
+        int startY = 50;
+        int lineHeight = 25;
+        int maxCharactersPerLine = 36;
+        int currentIndex = 0;
+
+        while (currentIndex < story.length()) {
+            int end = Math.min(currentIndex + maxCharactersPerLine, story.length());
+            String line = story.substring(currentIndex, end);
+            canvas.drawText(line, startX, startY, paint);
+            currentIndex += maxCharactersPerLine;
+            startY += lineHeight;
+        }
+
         pdfDocument.finishPage(page);
 
-        // Generate a unique filename based on the current timestamp
         String timestamp = String.valueOf(System.currentTimeMillis());
         String fileName = "story_" + timestamp + ".pdf";
 
-        // Define the file path where the PDF will be saved in the "Downloads" folder
         String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + fileName;
 
         try {
-            // Save the document to the specified file path
             FileOutputStream fos = new FileOutputStream(filePath);
             pdfDocument.writeTo(fos);
             pdfDocument.close();
             fos.close();
-
-            // Display a Toast to notify the user that the story has been downloaded
             Toast.makeText(context, "Story Downloaded: " + filePath, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     private void handleLikeOnClick(ForumPostViewHolder holder, int position) {
         ForumPostNew currentPost = forumPosts.get(position);
@@ -244,67 +258,80 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             return;
         }
 
-        DatabaseReference postRef = userRef.child(currentPost.getMessage());
-        System.out.println("2");
+        // Query to find the child where the message property matches currentPost.getMessage()
+        Query query = userRef.orderByChild("message").equalTo(currentPost.getMessage());
 
-        if (postRef == null) {
-            // Handle the case where postRef is null
-            System.out.println("Error: postRef is null");
-            return;
-        }
-
-        DatabaseReference likesRef = postRef.child("likes");
-        System.out.println("3");
-        DatabaseReference likesFromUsersRef = postRef.child("likesFromUsers");
-        System.out.println("4");
-
-        if (likesRef == null || likesFromUsersRef == null) {
-            // Handle the case where likesRef or likesFromUsersRef is null
-            System.out.println("Error: likesRef or likesFromUsersRef is null");
-            return;
-        }
-
-        // Check if the current user has already liked the post
-        likesFromUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println("5");
-                if (dataSnapshot.getValue() != null && dataSnapshot.child(currentUser).exists()) {
-                    // User has already liked the post, remove the like
-                    System.out.println("User has already liked the post, removing the like");
-                    likesFromUsersRef.child(currentUser).removeValue();
+                if (dataSnapshot.exists()) {
+                    // Iterate over the results (there might be multiple, but we assume one match)
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        DatabaseReference postRef = snapshot.getRef();
+                        System.out.println("Found postRef: " + postRef);
 
-                    // Update the likes count in Firebase
-                    likesRef.get().addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful() && task1.getResult() != null) {
-                            long likesCount = (long) task1.getResult().getValue();
+                        // Now you can use postRef to perform operations on the specific child
+                        // For example, you can get the likesRef and likesFromUsersRef
+                        DatabaseReference likesRef = postRef.child("likes");
+                        DatabaseReference likesFromUsersRef = postRef.child("likesFromUsers");
 
-                            // Update the likes count in Firebase
-                            postRef.child("likes").setValue(likesCount - 1);
+                        if (likesRef != null && likesFromUsersRef != null) {
+                            // Update the likes count based on your like logic
+                            likesFromUsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    System.out.println("5");
+                                    if (dataSnapshot.getValue() != null && dataSnapshot.child(currentUser).exists()) {
+                                        // User has already liked the post, remove the like
+                                        System.out.println("User has already liked the post, removing the like");
+                                        likesFromUsersRef.child(currentUser).removeValue();
 
-                            // Update the likes count in the TextView
-                            holder.numberOfLikes.setText(String.valueOf(likesCount - 1));
-                            System.out.println("Like removed successfully");
+                                        // Update the likes count in Firebase
+                                        likesRef.get().addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful() && task1.getResult() != null) {
+                                                long likesCount = (long) task1.getResult().getValue();
+
+                                                // Update the likes count in Firebase
+                                                postRef.child("likes").setValue(likesCount - 1);
+
+                                                // Update the likes count in the TextView
+                                                holder.numberOfLikes.setText(String.valueOf(likesCount - 1));
+                                                System.out.println("Like removed successfully");
+                                            }
+                                        });
+                                    } else {
+                                        // User hasn't liked the post, add the like
+                                        System.out.println("User hasn't liked the post, adding the like");
+                                        likesFromUsersRef.child(currentUser).setValue(true);
+
+                                        // Update the likes count in Firebase
+                                        likesRef.get().addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful() && task1.getResult() != null) {
+                                                long likesCount = (long) task1.getResult().getValue();
+
+                                                // Update the likes count in Firebase
+                                                postRef.child("likes").setValue(likesCount + 1);
+
+                                                // Update the likes count in the TextView
+                                                holder.numberOfLikes.setText(String.valueOf(likesCount + 1));
+                                                System.out.println("Like added successfully");
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    System.out.println("Error: Database operation canceled");
+                                }
+                            });
                         }
-                    });
+                        else {
+                            System.out.println("Error: likesRef or likesFromUsersRef is null");
+                        }
+                    }
                 } else {
-                    // User hasn't liked the post, add the like
-                    System.out.println("User hasn't liked the post, adding the like");
-                    likesFromUsersRef.child(currentUser).setValue(true);
-
-                    // Update the likes count in Firebase
-                    likesRef.get().addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful() && task1.getResult() != null) {
-                            long likesCount = (long) task1.getResult().getValue();
-
-                            // Update the likes count in Firebase
-                            postRef.child("likes").setValue(likesCount + 1);
-
-                            // Update the likes count in the TextView
-                            holder.numberOfLikes.setText(String.valueOf(likesCount + 1));
-                            System.out.println("Like added successfully");
-                        }
-                    });
+                    System.out.println("No matching post found");
                 }
             }
 
@@ -314,6 +341,7 @@ public class ForumPostAdapter extends RecyclerView.Adapter<ForumPostAdapter.Foru
             }
         });
     }
+
 
 
 

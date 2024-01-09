@@ -72,17 +72,18 @@ public class CustomAdapter extends ArrayAdapter<String> {
                 chat.getAllChatList();
 
 
-                    List<Users> allUsers = Users.getAllUsersFromDatabase(connection, currentUsername);
+                    List<Users> allUsers = Users.getAllUsers();
                     for(int i = 0; i < allUsers.size(); i++){
                         for(int j = 0; j  < allFriends.size(); j++){
                             if(allUsers.get(i).getUsername().equals(allFriends.get(j).getUsername())){
                                 allUsers.remove(i);
-                                break;
                             }
                         }
 
                     Users.setAllUsers(allUsers);
                 }
+
+
 
                 // Create a modifiable list from the unmodifiable one
                 List<String> modifiableList = new ArrayList<>(pendingUsersList);

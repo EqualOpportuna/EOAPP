@@ -31,7 +31,7 @@ public class login_page extends AppCompatActivity {
 
 
     private UserManager userManager;
-    private Job jobs;
+    private Job jobs = new Job();
     private StoryManager storyManager; // Add StoryManager instance
 
     @Override
@@ -56,9 +56,7 @@ public class login_page extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the login logic here
                 if (validateInputs()) {
-                    // Inputs are valid, proceed with login
                     login();
                 }
             }
@@ -100,7 +98,7 @@ public class login_page extends AppCompatActivity {
 
         if (connection != null) {
             try {
-                String query = "SELECT id, full_name, email, date_of_birth, career_description, avatar FROM users WHERE email = ? AND password = ?";
+                String query = "SELECT id, full_name, email, date_of_birth, career_description, avatar, short_intro, experience_education FROM users WHERE email = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, email);
                 preparedStatement.setString(2, password);
@@ -114,15 +112,13 @@ public class login_page extends AppCompatActivity {
                     String dateOfBirth = resultSet.getString("date_of_birth");
                     String career_desc = resultSet.getString("career_description");
                     String avatar = resultSet.getString("avatar");
+                    String intro = resultSet.getString("short_intro");
+                    String experience_education = resultSet.getString("experience_education");
 
-                    // Set user information in UserViewModel
-                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth, career_desc,avatar);
+                    userManager.saveUserInfo(userId, fullName, userEmail, dateOfBirth, career_desc,avatar, intro, experience_education);
                     jobs.fetchAndStoreJobData(connection);
 
-                    // Fetch and store stories using StoryManager
                     storyManager.fetchAndStoreStoryData(this, connection);
-
-
 
                     String loggedInFullName = userManager.getFullName();
 
@@ -130,19 +126,15 @@ public class login_page extends AppCompatActivity {
                     Friends.setAllFriends(allFriends);
                     chat.getAllChatList();
 
-
                         List<Users> allUsers = Users.getAllUsersFromDatabase(connection, loggedInFullName);
                         for(int i = 0; i < allUsers.size(); i++){
                             for(int j = 0; j  < allFriends.size(); j++){
                                 if(allUsers.get(i).getUsername().equals(allFriends.get(j).getUsername())){
                                     allUsers.remove(i);
-                                    break;
                                 }
                             }
                         }
                         Users.setAllUsers(allUsers);
-
-
                     showToast("Logged in successfully");
                     navigateToMainPage();
                 } else {
@@ -164,6 +156,7 @@ public class login_page extends AppCompatActivity {
         // Start the MainPageActivity
         Intent intent = new Intent(login_page.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void navigateToForgotPassword() {

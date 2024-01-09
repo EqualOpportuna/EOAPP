@@ -32,7 +32,7 @@ public class ChatHistFragment extends Fragment {
     private FirebaseDatabase db;
     private DatabaseReference usersRef;
 
-    private ChatAdapter chatAdapter;  // Custom adapter for chat messages
+    private ChatAdapter chatAdapter;
 
 
     @Override
@@ -53,18 +53,12 @@ public class ChatHistFragment extends Fragment {
         chatListView.setAdapter(chatAdapter);
 
 
-        // Set up the adapter for chat messages (you'll need to create a custom adapter)
-        // ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, messageList);
-        // chatListView.setAdapter(adapter);
 
-        // Set up onClickListener for the send button
-        // Assume you have the current user's username and the other user's username
         String currentUserName = userManager.getFullName();
         String otherUserName = ""; // Replace with the actual current user's username
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey("key")) {
             otherUserName = bundle.getString("key");
-            // Now you have the other user's username, you can set it to the UI or perform any necessary actions
             userNameTextView.setText(otherUserName);
         }
         loadChatMessages(currentUserName, otherUserName);
@@ -72,30 +66,21 @@ public class ChatHistFragment extends Fragment {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle sending the message
                 String messageText = messageEditText.getText().toString().trim();
                 if (!messageText.isEmpty()) {
-                    // Create a ChatMessage object
                     long timestamp = System.currentTimeMillis();
                     ChatMessage chatMessage = new ChatMessage(currentUserName, finalOtherUserName, messageText, timestamp);
 
-                    // Dynamically create chatId based on both users' usernames
                     String chatId = getChatId(currentUserName, finalOtherUserName);
 
-                    // Reference to the chat messages in the database
-                    DatabaseReference chatRef = usersRef.child(chatId);  // Use the usersRef reference
+                    DatabaseReference chatRef = usersRef.child(chatId);
 
-                    // Push the new message to the database
                     chatRef.push().setValue(chatMessage);
 
-                    // Clear the input field
                     messageEditText.getText().clear();
                 }
             }
         });
-
-
-        // Optional: Set up additional features like attachments
 
         return view;
     }
