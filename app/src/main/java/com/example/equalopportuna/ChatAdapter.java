@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import java.util.List;
 
@@ -17,10 +18,13 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     private Context context;
     private List<ChatMessage> chatMessages;
 
-    public ChatAdapter(Context context, List<ChatMessage> chatMessages) {
+    private String currentUsername;
+
+    public ChatAdapter(Context context, List<ChatMessage> chatMessages, String currentUsername) {
         super(context, 0, chatMessages);
         this.context = context;
         this.chatMessages = chatMessages;
+        this.currentUsername = currentUsername;
     }
 
     public void setChatMessages(List<ChatMessage> chatMessages) {
@@ -46,7 +50,16 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
         TextView messageTextView = convertView.findViewById(R.id.messageTextView);
 
         if (chatMessage != null) {
-            senderTextView.setText(chatMessage.getSender());
+            if(chatMessage.getSender().equals(currentUsername)){
+                senderTextView.setText("You");
+                senderTextView.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_dark));
+
+            }
+            else {
+                senderTextView.setText(chatMessage.getSender());
+                senderTextView.setTextColor(ContextCompat.getColor(context, android.R.color.holo_blue_dark));
+
+            }
             messageTextView.setText(chatMessage.getMessage());
         }
 

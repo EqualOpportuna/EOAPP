@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/coursebg"
     android:fitsSystemWindows="true"
     tools:context=".activity_course_details" >
 
@@ -20,20 +21,17 @@
             tools:layout_editor_absoluteY="-16dp">
 
 
-            <!-- Modify the Button constraints to make space for the Spinner -->
-
             <TextView
                 android:id="@+id/heading"
                 android:layout_width="366dp"
                 android:layout_height="89dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="104dp"
                 android:text="EmpowerHer: Mastering Job Search Strategies for Women"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <SeekBar
                 android:id="@+id/progressSlider"
@@ -117,26 +115,9 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/header3"
-            android:layout_width="412dp"
-            android:layout_height="60dp"
-            android:background="#ECCDD0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="57dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:background="#00FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/header"
-            app:layout_constraintTop_toTopOf="@+id/header"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

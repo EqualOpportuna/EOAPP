@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFEFE">
+    android:background="@drawable/storybg"
+    >
 
     <TextView
         android:id="@+id/TVUsername"
@@ -78,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/rvComments"
         android:layout_width="0dp"
         android:layout_height="0dp"

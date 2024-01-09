@@ -46,7 +46,7 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToChatHistFragment(chatItem.getUsername());
+                navigateToChatHistFragment(chatItem.getUsername(), chatItem.getAvatarName());
             }
         });
     }
@@ -56,14 +56,15 @@ public class chat_adapter extends RecyclerView.Adapter<chat_adapter.ChatViewHold
         return chatList.size();
     }
 
-    private void navigateToChatHistFragment(String username) {
+    private void navigateToChatHistFragment(String username, String avatar) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
 
         ChatHistFragment chatHistFragment = new ChatHistFragment();
 
         // Create a Bundle and add the username to it
         Bundle bundle = new Bundle();
-        bundle.putString("key", username);
+        bundle.putString("key_username", username);
+        bundle.putString("key_avatar", avatar);
         chatHistFragment.setArguments(bundle);
 
         // Begin the transaction
