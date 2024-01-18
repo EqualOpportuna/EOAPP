@@ -3,8 +3,12 @@ package com.example.equalopportuna;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -69,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Check for pending status in Firebase
         handler.post(checkPendingStatusRunnable);
+
+        ImageView logoImageView = findViewById(R.id.logoImageView);
+        logoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSignOutConfirmationDialog();
+            }
+        });
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
@@ -131,11 +144,27 @@ public class MainActivity extends AppCompatActivity {
                             .navigate(R.id.courselistingFragment);
                     return true;
                 }
-
                 return false;
             }
         });
     }
+
+
+    @Override
+    public void onBackPressed() {
+        // Get the NavController
+        NavController navController = Navigation.findNavController(this, R.id.NHFMain);
+
+        // Check if there are fragments in the back stack
+        if (navController.popBackStack()) {
+            // If there are, pop the fragment
+            return;
+        } else {
+            // If there are no fragments in the back stack, move the task to the back
+            moveTaskToBack(true);
+        }
+    }
+
 
     private void checkPendingStatus() {
 
@@ -301,6 +330,31 @@ public class MainActivity extends AppCompatActivity {
                         showToast("Failed to delete new_job_posted node");
                     }
                 });
+    }
+
+    private void showSignOutConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sign Out Confirmation")
+                .setMessage("Are you sure you want to sign out?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked Yes, sign out and navigate to login_page
+                        signOutAndNavigateToLogin();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked No, do nothing, dialog will be dismissed
+                    }
+                })
+                .show();
+    }
+
+    private void signOutAndNavigateToLogin() {
+        finish();
+        System.exit(0);
     }
 
 

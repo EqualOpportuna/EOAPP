@@ -36,6 +36,7 @@ public class change_pw2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(change_pw2.this, login_page.class));
+                finish();
             }
         });
 
@@ -45,6 +46,7 @@ public class change_pw2 extends AppCompatActivity {
                 if(validateinputs()){
                     changeDatainDatabase();
                     startActivity(new Intent(change_pw2.this, login_page.class));
+                    finish();
                 }
             }
         });

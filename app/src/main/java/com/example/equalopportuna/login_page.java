@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class login_page extends AppCompatActivity {
@@ -39,6 +40,8 @@ public class login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        userManager = null;
+
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         loginButton = findViewById(R.id.btnLogin);
@@ -49,9 +52,6 @@ public class login_page extends AppCompatActivity {
         friendsRef = db.getReference("friends");
 
 
-        // Initialize instances
-        userManager = UserManager.getInstance(this);
-        storyManager = StoryManager.getInstance(this); // Initialize StoryManager
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +90,8 @@ public class login_page extends AppCompatActivity {
     }
 
     private void login() {
+        userManager = UserManager.getInstance(this);
+        storyManager = StoryManager.getInstance(this);
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString();
 
@@ -120,12 +122,15 @@ public class login_page extends AppCompatActivity {
                     jobs.fetchAndStoreJobData(connection);
 
                     storyManager.fetchAndStoreStoryData(this, connection);
-
+                    Friends.clearFriends();
                     String loggedInFullName = userManager.getFullName();
-
+                    Users.clearUsers();
+                 //   System.out.println(loggedInFullName);
                     List<Friends> allFriends = Friends.getAllFriendsFromDatabase(connection, loggedInFullName);
+
                     Friends.setAllFriends(allFriends);
                     chat.getAllChatList();
+                    Users.clearUsers();
 
                         List<Users> allUsers = Users.getAllUsersFromDatabase(connection, loggedInFullName);
                         for(int i = 0; i < allUsers.size(); i++){
@@ -135,7 +140,11 @@ public class login_page extends AppCompatActivity {
                                 }
                             }
                         }
-                        Users.setAllUsers(allUsers);
+
+
+                    Users.setAllUsers(allUsers);
+                    List<Users> use = Users.getAllUsers();
+
                     showToast("Logged in successfully");
                     navigateToMainPage();
                 } else {
@@ -164,6 +173,7 @@ public class login_page extends AppCompatActivity {
         // Start the MainPageActivity
         Intent intent = new Intent(login_page.this, forgot_password.class);
         startActivity(intent);
+        finish();
     }
 
     private void showToast(String message) {
@@ -174,5 +184,6 @@ public class login_page extends AppCompatActivity {
         // Start the SignupActivity
         Intent intent = new Intent(login_page.this, sign_up.class);
         startActivity(intent);
+        finish();
     }
 }

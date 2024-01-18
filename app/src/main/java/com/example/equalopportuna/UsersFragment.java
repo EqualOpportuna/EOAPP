@@ -44,6 +44,9 @@ public class UsersFragment extends Fragment {
 
         // Use the stored list of users
         List<Users> UsersList = Users.getAllUsers();
+        for(int i = 0; i < UsersList.size(); i ++) {
+            System.out.println(UsersList.get(i).getUsername());
+        }
 
         // RecyclerView adapter
         user_adapter adp = new user_adapter(requireContext(), UsersList, loggedInUser);
@@ -60,6 +63,7 @@ public class UsersFragment extends Fragment {
 
         return view;
     }
+
 
 
 

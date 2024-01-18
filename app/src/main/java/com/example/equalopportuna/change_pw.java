@@ -45,6 +45,7 @@ public class change_pw extends AppCompatActivity {
             public void onClick(View v) {
                 if(validateinputs()){
                     changeDatainDatabase();
+                    finish();
                 }
             }
         });

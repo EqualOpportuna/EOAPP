@@ -121,7 +121,6 @@ public class MainPageFragment extends Fragment {
             }
         });
 
-        // Get user information from UserViewModel
         int userId = userManager.getUserId();
         String fullName = userManager.getFullName();
         welcomeTextView.setText("Hey " + fullName + "!");
@@ -131,7 +130,6 @@ public class MainPageFragment extends Fragment {
         shortIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show toast when shortIntro is clicked
                 showEditableDialog("Short Introduction", shortIntro, "short_intro");
             }
         });
@@ -139,7 +137,6 @@ public class MainPageFragment extends Fragment {
         edu_ex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show toast when edu_ex is clicked
                 showEditableDialog("Education and Experience", edu_ex, "experience_education");
             }
         });

@@ -72,4 +72,7 @@ public class Users {
 
         return usersList;
 }
+public static void clearUsers(){
+        userList.clear();
+}
 }

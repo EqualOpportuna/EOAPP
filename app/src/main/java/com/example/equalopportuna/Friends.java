@@ -128,6 +128,9 @@ public class Friends extends Users {
 
         return friendsList;
     }
+    public static void clearFriends(){
+        friendList.clear();
+    }
 
 
 }
